@@ -69,9 +69,11 @@ export default function DotFieldShader() {
         float dotAlpha = 1.0 - smoothstep(radius - 0.05, radius + 0.05, d);
 
         // Modulate final opacity based on the wave to deepen the contrast
-        float finalOpacity = dotAlpha * mix(0.1, 0.9, brightness);
+        // Decrease the max value (currently 0.45) if you want the peaks to be even dimmer
+        float finalOpacity = dotAlpha * mix(0.1, 0.45, brightness);
         
         // Crisp teal/white dot color
+        // You can also darken the base color here if needed (e.g. vec3(0.6, 0.7, 0.8))
         vec3 dotColor = vec3(0.85, 0.95, 1.0);
 
         // Premultiplied alpha output for flawless canvas blending over the hero gradient
@@ -99,9 +101,9 @@ export default function DotFieldShader() {
       gl.ARRAY_BUFFER,
       new Float32Array([
         -1, -1,
-         1, -1,
-        -1,  1,
-         1,  1
+        1, -1,
+        -1, 1,
+        1, 1
       ]),
       gl.STATIC_DRAW
     )
@@ -117,7 +119,7 @@ export default function DotFieldShader() {
     let frameId: number
 
     const render = () => {
-      t += 0.01
+      t += 0.03
       gl.uniform1f(timeLoc, t)
       gl.uniform2f(resLoc, canvas.width, canvas.height)
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
