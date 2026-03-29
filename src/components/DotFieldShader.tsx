@@ -12,12 +12,20 @@ export default function DotFieldShader() {
     if (!gl) return
 
     const resizeView = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight * 0.65
-      gl.viewport(0, 0, canvas.width, canvas.height)
+      const parent = canvas.parentElement;
+      if (parent) {
+        canvas.width = parent.clientWidth;
+        canvas.height = parent.clientHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      } else {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight * 0.65;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
     }
 
-    resizeView()
+    // Initial resize inside a layout effect or small timeout ensures parent node exists
+    setTimeout(resizeView, 0);
     window.addEventListener("resize", resizeView)
 
     const vertex = `
