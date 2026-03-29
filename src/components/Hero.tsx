@@ -9,8 +9,9 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 hero-gradient z-0" />
         <div className="hero-radial-light z-10" />
         <ParticleBackground />
+        <div className="hero-noise z-30" />
 
-        <div className="relative z-30 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
+        <div className="relative z-40 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
           <div className="max-w-md">
             <p className="text-2xl md:text-3xl lg:text-4xl text-white/90 font-light leading-tight">
               The Future of <br />

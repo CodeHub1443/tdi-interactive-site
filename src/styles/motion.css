@@ -27,3 +27,13 @@
   );
   pointer-events: none;
 }
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("/noise.png");
+  background-repeat: repeat;
+  opacity: 0.15;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
