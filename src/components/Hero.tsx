@@ -7,9 +7,10 @@ const Hero: React.FC = () => {
       {/* TOP HERO STAGE - 65% height */}
       <div className="relative h-[65%] flex items-end pb-12 shrink-0">
         <div className="absolute inset-0 hero-gradient z-0" />
+        <div className="hero-radial-light z-10" />
         <ParticleBackground />
 
-        <div className="relative z-20 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
+        <div className="relative z-30 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
           <div className="max-w-md">
             <p className="text-2xl md:text-3xl lg:text-4xl text-white/90 font-light leading-tight">
               The Future of <br />

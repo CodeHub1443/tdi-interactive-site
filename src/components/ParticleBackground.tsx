@@ -20,7 +20,7 @@ const ParticleBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-60 z-10"
+      className="absolute inset-0 pointer-events-none opacity-60 z-20"
     />
   );
 };
