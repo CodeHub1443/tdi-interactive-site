@@ -5,7 +5,13 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(120deg, #0C1117, #0E4D4D, #0C1117);
+  background: linear-gradient(
+    120deg,
+    #081a1a 0%,
+    #0e4d4d 35%,
+    #092222 70%,
+    #040707 100%
+  );
   background-size: 200% 200%;
   animation: heroGradientMove 20s linear infinite;
 }
@@ -36,4 +42,21 @@
   opacity: 0.15;
   mix-blend-mode: soft-light;
   pointer-events: none;
+}
+
+.hero-light-sweep {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at 45% 40%,
+    rgba(255, 255, 255, 0.35),
+    transparent 60%
+  );
+  mix-blend-mode: overlay;
+  animation: sweepMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes sweepMove {
+  0% { transform: translateX(-10%) translateY(-5%); }
+  100% { transform: translateX(10%) translateY(5%); }
 }

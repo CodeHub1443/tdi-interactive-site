@@ -1,17 +1,19 @@
 import React from "react";
-import ParticleBackground from "@/components/ParticleBackground";
+import HalftoneOverlay from "@/components/HalftoneOverlay";
 
 const Hero: React.FC = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden flex flex-col bg-black">
       {/* TOP HERO STAGE - 65% height */}
       <div className="relative h-[65%] flex items-end pb-12 shrink-0">
+        {/* Background Layers */}
         <div className="absolute inset-0 hero-gradient z-0" />
-        <div className="hero-radial-light z-10" />
-        <ParticleBackground />
-        <div className="hero-noise z-30" />
+        <HalftoneOverlay />
+        <div className="hero-light-sweep z-10" />
+        <div className="hero-noise z-20" />
 
-        <div className="relative z-40 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
+        {/* Content aligned with navbar */}
+        <div className="relative z-30 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
           <div className="max-w-md">
             <p className="text-2xl md:text-3xl lg:text-4xl text-white/90 font-light leading-tight">
               The Future of <br />
