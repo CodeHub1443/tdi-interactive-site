@@ -40,16 +40,16 @@
     radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.18), transparent 45%),
     radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.12), transparent 40%);
   filter: blur(80px);
-  animation: heroLightDrift 40s linear infinite alternate;
+  animation: heroLightDrift 80s linear infinite alternate;
   pointer-events: none;
 }
 
 @keyframes heroLightDrift {
   0% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-5%, -3%, 0);
   }
   100% {
-    transform: translate3d(-10%, 6%, 0);
+    transform: translate3d(5%, 3%, 0);
   }
 }
 
