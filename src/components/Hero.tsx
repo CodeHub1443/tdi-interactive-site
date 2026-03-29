@@ -9,11 +9,12 @@ const Hero: React.FC = () => {
         {/* Background Layers */}
         <div className="absolute inset-0 hero-gradient z-0" />
         <HalftoneOverlay />
-        <div className="hero-light-sweep z-10" />
-        <div className="hero-noise z-20" />
+        <div className="hero-wave z-10" />
+        <div className="hero-light-sweep z-20" />
+        <div className="hero-noise z-30" />
 
         {/* Content aligned with navbar */}
-        <div className="relative z-30 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
+        <div className="relative z-40 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
           <div className="max-w-md">
             <p className="text-2xl md:text-3xl lg:text-4xl text-white/90 font-light leading-tight">
               The Future of <br />
