@@ -1,20 +1,19 @@
 import React from "react";
-import HalftoneOverlay from "@/components/HalftoneOverlay";
 
 const Hero: React.FC = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden flex flex-col bg-black">
       {/* TOP HERO STAGE - 65% height */}
       <div className="relative h-[65%] flex items-end pb-12 shrink-0">
-        {/* Background Layers */}
+        {/* New Background Structure */}
         <div className="absolute inset-0 hero-gradient z-0" />
-        <HalftoneOverlay />
-        <div className="hero-wave z-10" />
-        <div className="hero-light-sweep z-20" />
+        <div className="hero-light z-10" />
+        <div className="hero-dots z-20" />
         <div className="hero-noise z-30" />
+        <div className="hero-vignette z-40" />
 
         {/* Content aligned with navbar */}
-        <div className="relative z-40 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
+        <div className="relative z-50 mx-auto w-full max-w-[1800px] px-6 flex justify-between items-end">
           <div className="max-w-md">
             <p className="text-2xl md:text-3xl lg:text-4xl text-white/90 font-light leading-tight">
               The Future of <br />
@@ -44,14 +43,14 @@ const Hero: React.FC = () => {
       {/* BOTTOM PANEL - 35% height */}
       <div className="relative h-[35%] bg-white border-t border-gray-100 shrink-0">
         <div className="h-full mx-auto max-w-[1800px] px-6 flex flex-col md:flex-row justify-between items-center md:items-end pb-12 pt-8 gap-8 font-sans">
-          
+
           <div className="max-w-[840px] h-full flex flex-col justify-end">
             <h2 className="text-3xl md:text-4xl lg:text-5xl text-textDark mb-4 leading-[1.15] font-normal tracking-tight">
               Intelligent Automation for <br />
               Modern Enterprise
             </h2>
             <p className="text-md md:text-lg text-textMuted font-light leading-relaxed max-w-2xl">
-              TDI designs and deploys AI systems that automate operational 
+              TDI designs and deploys AI systems that automate operational
               workflows across enterprises.
             </p>
           </div>
