@@ -29,14 +29,13 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 h-[80px] flex items-center transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 h-[80px] flex items-center transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100" : "bg-transparent"
+        }`}
     >
-      <div className="max-w-container mx-auto w-full px-6 flex justify-between items-center">
+      <div className="max-w-[1800px] mx-auto w-full px-6 flex justify-between items-center">
         {/* Left side: Logo */}
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className={`text-2xl font-bold tracking-tight transition-colors duration-300 ${isScrolled ? "text-accentTeal" : "text-white"}`}
         >
           TDI
@@ -49,9 +48,8 @@ const Navbar: React.FC = () => {
               <li key={link.name}>
                 <Link
                   href={link.href}
-                  className={`text-sm font-medium transition-colors duration-300 ${
-                    isScrolled ? "text-textDark hover:text-accentTeal" : "text-white/90 hover:text-white"
-                  }`}
+                  className={`text-sm font-medium transition-colors duration-300 ${isScrolled ? "text-textDark hover:text-accentTeal" : "text-white/90 hover:text-white"
+                    }`}
                 >
                   {link.name}
                 </Link>
