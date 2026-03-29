@@ -65,16 +65,38 @@ const AbstractTriangleGraphic = () => (
   </svg>
 );
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+  },
+};
+
 const Technology: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(3);
 
   return (
     <section className="bg-black text-white py-24 md:py-32 w-full overflow-hidden">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={containerVariants}
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24"
+      >
         
         {/* Left Column: List and Titles */}
         <div className="flex flex-col h-full justify-between">
-          <div>
+          <motion.div variants={itemVariants}>
             <div className="inline-block border border-white/20 rounded-full px-4 py-1.5 text-xs tracking-wide text-white/70 mb-8">
               Technology
             </div>
@@ -87,9 +109,9 @@ const Technology: React.FC = () => {
             <button className="flex items-center gap-3 border border-white/30 rounded-full px-6 py-3 text-sm hover:bg-white hover:text-black transition-all mb-16 lg:mb-24 w-max">
               Contact Us <span className="text-lg leading-none">→</span>
             </button>
-          </div>
+          </motion.div>
 
-          <div className="pb-4">
+          <motion.div variants={itemVariants} className="pb-4">
             <div className="flex justify-between items-center text-xs text-white/50 mb-6 uppercase tracking-wider font-semibold border-b border-white/10 pb-4">
               <span>Select an item</span>
               <span>{activeIndex + 1}/{techItems.length}</span>
@@ -121,11 +143,11 @@ const Technology: React.FC = () => {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Column: Interactive Card Display */}
-        <div className="relative w-full h-[500px] lg:h-auto lg:min-h-[700px] flex items-stretch">
+        <motion.div variants={itemVariants} className="relative w-full h-[500px] lg:h-auto lg:min-h-[700px] flex items-stretch">
           <div className="w-full h-full relative rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent overflow-hidden flex flex-col p-8 md:p-12">
             
             {/* Top Indicator */}
@@ -163,9 +185,9 @@ const Technology: React.FC = () => {
             <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accentTeal/10 blur-[100px] rounded-full pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-50 mix-blend-overlay" />
           </div>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };

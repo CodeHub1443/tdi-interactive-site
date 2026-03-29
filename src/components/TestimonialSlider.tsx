@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -31,6 +32,22 @@ const partners = [
   "CME Group",
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+  },
+};
+
 const Testimonials: React.FC = () => {
   const [current, setCurrent] = useState(0);
 
@@ -39,11 +56,17 @@ const Testimonials: React.FC = () => {
 
   return (
     <section className="bg-white text-textDark w-full py-24 md:py-32">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={containerVariants}
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start"
+      >
         
         {/* Left Column: Headlines and Logos */}
         <div className="flex flex-col h-full justify-between">
-          <div>
+          <motion.div variants={itemVariants}>
             <div className="inline-block border border-gray-200 rounded-full px-4 py-1 text-xs tracking-wider text-gray-500 mb-8 uppercase">
               Partners
             </div>
@@ -51,20 +74,20 @@ const Testimonials: React.FC = () => {
             <h2 className="text-4xl md:text-5xl lg:text-[56px] font-normal leading-tight tracking-tight max-w-[500px]">
               We Build Enterprise AI Solutions For Our Clients
             </h2>
-          </div>
+          </motion.div>
 
           {/* Partner Logos Strip */}
-          <div className="mt-16 lg:mt-32 w-full overflow-hidden flex gap-8 md:gap-12 opacity-50 grayscale select-none">
+          <motion.div variants={itemVariants} className="mt-16 lg:mt-32 w-full overflow-hidden flex gap-8 md:gap-12 opacity-50 grayscale select-none">
             {partners.map((partner, idx) => (
               <span key={idx} className="text-xl md:text-2xl font-bold font-sans whitespace-nowrap shrink-0">
                 {partner}
               </span>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Column: Testimonial Card */}
-        <div className="relative border-t border-gray-200 pt-10 mt-10 lg:mt-0 lg:border-t-0 lg:pt-0">
+        <motion.div variants={itemVariants} className="relative border-t border-gray-200 pt-10 mt-10 lg:mt-0 lg:border-t-0 lg:pt-0">
           
           <div className="flex gap-6 mb-12 items-center">
             {/* Quote Icon */}
@@ -111,9 +134,9 @@ const Testimonials: React.FC = () => {
             </button>
           </div>
           
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };

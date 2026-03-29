@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const products = [
   {
@@ -39,26 +42,49 @@ const products = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+  },
+};
+
 const Products: React.FC = () => {
   return (
     <section className="bg-black text-white w-full py-24 md:py-32 border-t border-white/5 overflow-hidden">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-8 flex flex-col items-center">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={containerVariants}
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 flex flex-col items-center"
+      >
         
         {/* Header */}
-        <div className="border border-white/20 rounded-full px-4 py-1 text-xs tracking-wider text-white/50 mb-8 uppercase">
+        <motion.div variants={itemVariants} className="border border-white/20 rounded-full px-4 py-1 text-xs tracking-wider text-white/50 mb-8 uppercase">
           Our Products
-        </div>
+        </motion.div>
         
-        <h2 className="text-3xl md:text-5xl font-light text-center mb-16 lg:mb-24 leading-snug">
+        <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl font-light text-center mb-16 lg:mb-24 leading-snug">
           Explore our Cutting-Edge <br className="hidden md:block"/>
           Machine Learning Products
-        </h2>
+        </motion.h2>
 
         {/* Horizontal Slider/Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
           {products.map((product) => (
-            <div 
+            <motion.div 
               key={product.id} 
+              variants={itemVariants}
               className="group bg-[#020505] hover:bg-[#050a0a] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col transition-all duration-300 min-h-[480px]"
             >
               {/* Top Graphic Panel */}
@@ -85,21 +111,21 @@ const Products: React.FC = () => {
                   Learn more &gt;
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Navigation Arrows */}
-        <div className="flex gap-4 mt-16 text-white/40">
+        <motion.div variants={itemVariants} className="flex gap-4 mt-16 text-white/40">
           <button className="w-10 h-10 flex items-center justify-center hover:text-white transition-colors">
             &larr;
           </button>
           <button className="w-10 h-10 flex items-center justify-center hover:text-white transition-colors">
             &rarr;
           </button>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };

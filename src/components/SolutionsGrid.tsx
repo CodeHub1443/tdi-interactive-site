@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const solutions = [
   {
@@ -19,13 +22,35 @@ const solutions = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+  },
+};
+
 const SolutionsGrid: React.FC = () => {
   return (
-    <section className="bg-black text-white w-full py-24 md:py-32 border-t border-white/5">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 xl:grid-cols-[1fr_2.5fr] gap-12 lg:gap-24">
+    <section className="bg-black text-white w-full py-24 md:py-32 border-t border-white/5 overflow-hidden">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={containerVariants}
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 xl:grid-cols-[1fr_2.5fr] gap-12 lg:gap-24"
+      >
         
         {/* Left Side: Sticky or static CTA group */}
-        <div className="flex flex-col items-start gap-8">
+        <motion.div variants={itemVariants} className="flex flex-col items-start gap-8">
           <div className="border border-accentTeal/30 text-accentTeal text-xs font-semibold px-4 py-1.5 rounded-full mt-2">
             Enterprise Solutions
           </div>
@@ -37,19 +62,19 @@ const SolutionsGrid: React.FC = () => {
           <button className="flex items-center gap-3 border border-white/30 rounded-full px-6 py-3 text-sm hover:bg-white hover:text-black transition-all mb-4">
             Get Started <span className="text-lg leading-none">→</span>
           </button>
-        </div>
+        </motion.div>
 
         {/* Right Side: Headlines and Grid */}
         <div className="flex flex-col">
-          <h2 className="text-3xl md:text-5xl lg:text-[56px] font-normal leading-[1.1] mb-12 max-w-4xl tracking-tight">
+          <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl lg:text-[56px] font-normal leading-[1.1] mb-12 max-w-4xl tracking-tight">
             Tailored Ai Solutions to Enhance <br className="hidden md:block"/>
             Your Business Performance
-          </h2>
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
             
             {/* Header/Title Card within Grid */}
-            <div className="bg-[#050b0b] border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col justify-center min-h-[300px]">
+            <motion.div variants={itemVariants} className="bg-[#050b0b] border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col justify-center min-h-[300px]">
               <div className="w-8 h-8 rounded-full bg-accentTeal/10 flex items-center justify-center mb-6">
                 <span className="text-accentTeal text-xl">⚙</span>
               </div>
@@ -58,12 +83,13 @@ const SolutionsGrid: React.FC = () => {
                 ML Ops for Accurate <br/>
                 Forecasting
               </h3>
-            </div>
+            </motion.div>
 
             {/* Feature Cards Loop */}
-            {solutions.map((solution, idx) => (
-              <div 
+            {solutions.map((solution) => (
+              <motion.div 
                 key={solution.id} 
+                variants={itemVariants}
                 className="group relative bg-[#050b0b] border border-white/5 hover:border-accentTeal/30 rounded-2xl p-8 lg:p-10 flex flex-col transition-all duration-500 overflow-hidden min-h-[300px]"
               >
                 <div className="flex items-center justify-between mb-8 z-10 w-full relative">
@@ -96,13 +122,13 @@ const SolutionsGrid: React.FC = () => {
                 
                 {/* Hover Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-accentTeal/0 via-transparent to-accentTeal/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              </div>
+              </motion.div>
             ))}
             
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };
