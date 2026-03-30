@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const isActive = isScrolled || isMobileMenuOpen || isHovered;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,9 +45,11 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className={`fixed top-0 left-0 right-0 z-50 h-[80px] flex items-center transition-all duration-300 ${
-          isScrolled || isMobileMenuOpen
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100"
+          isActive
+            ? "bg-white shadow-xl rounded-b-[32px] border-b border-gray-100"
             : "bg-transparent"
         }`}
       >
@@ -52,11 +58,16 @@ const Navbar: React.FC = () => {
           <Link
             href="/"
             onClick={() => setIsMobileMenuOpen(false)}
-            className={`text-2xl font-bold tracking-tight transition-colors duration-300 ${
-              isScrolled || isMobileMenuOpen ? "text-accentTeal" : "text-white"
-            }`}
+            className="flex items-center shrink-0"
           >
-            TDI
+            <Image 
+              src={isActive ? "/TDI_logo_Black.svg" : "/TDI_logo_White.svg"} 
+              alt="TDI Logo" 
+              width={100} 
+              height={32} 
+              className="h-8 w-auto mix-blend-normal transition-opacity duration-300"
+              priority
+            />
           </Link>
 
           {/* Right side navigation links & CTA (Desktop/Tablet Landscape) */}
@@ -67,7 +78,7 @@ const Navbar: React.FC = () => {
                   <Link
                     href={link.href}
                     className={`text-sm font-medium transition-colors duration-300 ${
-                      isScrolled ? "text-textDark hover:text-accentTeal" : "text-white/90 hover:text-white"
+                      isActive ? "text-textDark hover:text-accentTeal" : "text-white/90 hover:text-white"
                     }`}
                   >
                     {link.name}
@@ -88,7 +99,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Button (Hamburger/Close) */}
           <button
             className={`lg:hidden p-2 -mr-2 transition-colors duration-300 ${
-              isScrolled || isMobileMenuOpen ? "text-textDark" : "text-white"
+              isActive ? "text-textDark" : "text-white"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
