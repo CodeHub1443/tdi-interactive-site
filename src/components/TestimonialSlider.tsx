@@ -55,7 +55,7 @@ const Testimonials: React.FC = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="bg-white text-textDark w-full py-24 md:py-32">
+    <section className="bg-white text-textDark w-full h-full flex items-center py-12 md:py-16">
       <motion.div 
         initial="hidden"
         whileInView="visible"

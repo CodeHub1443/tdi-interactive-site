@@ -60,7 +60,7 @@ const itemVariants = {
 
 const Products: React.FC = () => {
   return (
-    <section className="bg-black text-white w-full py-24 md:py-32 border-t border-white/5 overflow-hidden">
+    <section className="bg-black text-white w-full h-full flex items-center py-12 md:py-16 border-t border-white/5 overflow-hidden">
       <motion.div 
         initial="hidden"
         whileInView="visible"

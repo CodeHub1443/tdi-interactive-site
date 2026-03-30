@@ -85,7 +85,7 @@ const Technology: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(3);
 
   return (
-    <section className="bg-black text-white py-24 md:py-32 w-full overflow-hidden">
+    <section className="bg-black text-white py-12 md:py-16 w-full h-full flex items-center overflow-hidden">
       <motion.div 
         initial="hidden"
         whileInView="visible"
