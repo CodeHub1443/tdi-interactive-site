@@ -40,7 +40,7 @@ const itemVariants = {
 
 const SolutionsGrid: React.FC = () => {
   return (
-    <section className="bg-black text-white w-full h-full flex items-center py-12 md:py-16 border-t border-white/5 overflow-hidden">
+    <section className="bg-[#050a0a] text-white w-full h-full flex items-center py-12 md:py-16 border-t border-white/5 overflow-hidden">
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -74,7 +74,7 @@ const SolutionsGrid: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
             
             {/* Header/Title Card within Grid */}
-            <motion.div variants={itemVariants} className="bg-[#050b0b] border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col justify-center min-h-[300px]">
+            <motion.div variants={itemVariants} className="bg-[#0c1414] border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col justify-center min-h-[300px]">
               <div className="w-8 h-8 rounded-full bg-accentTeal/10 flex items-center justify-center mb-6">
                 <span className="text-accentTeal text-xl">⚙</span>
               </div>
@@ -90,7 +90,7 @@ const SolutionsGrid: React.FC = () => {
               <motion.div 
                 key={solution.id} 
                 variants={itemVariants}
-                className="group relative bg-[#050b0b] border border-white/5 hover:border-accentTeal/30 rounded-2xl p-8 lg:p-10 flex flex-col transition-all duration-500 overflow-hidden min-h-[300px]"
+                className="group relative bg-[#0c1414] border border-white/5 hover:border-accentTeal/30 rounded-2xl p-8 lg:p-10 flex flex-col transition-all duration-500 overflow-hidden min-h-[300px]"
               >
                 <div className="flex items-center justify-between mb-8 z-10 w-full relative">
                   <div className="flex items-center gap-3">

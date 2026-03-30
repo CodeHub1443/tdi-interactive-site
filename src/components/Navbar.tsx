@@ -1,6 +1,6 @@
 "use client";
 
-import { TransitionLink as Link } from "./TransitionLink";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {

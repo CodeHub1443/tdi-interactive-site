@@ -60,7 +60,7 @@ const itemVariants = {
 
 const Products: React.FC = () => {
   return (
-    <section className="bg-black text-white w-full h-full flex items-center py-12 md:py-16 border-t border-white/5 overflow-hidden">
+    <section className="bg-[#0d1a1a] text-white w-full h-full flex items-center py-12 md:py-16 border-t border-white/5 overflow-hidden">
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -85,7 +85,7 @@ const Products: React.FC = () => {
             <motion.div 
               key={product.id} 
               variants={itemVariants}
-              className="group bg-[#020505] hover:bg-[#050a0a] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col transition-all duration-300 min-h-[480px]"
+              className="group bg-[#152525] hover:bg-[#1a2e2e] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col transition-all duration-300 min-h-[480px]"
             >
               {/* Top Graphic Panel */}
               <div className="relative h-56 border-b border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent flex items-start justify-end p-6">
