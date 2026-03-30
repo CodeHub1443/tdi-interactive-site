@@ -54,9 +54,11 @@ const Leadership: React.FC = () => {
         </motion.h2>
         
         <motion.p variants={itemVariants} className="text-sm md:text-base text-gray-500 font-light text-center max-w-2xl leading-relaxed mb-20">
-          Founded in 2017, TDI Technologies is a self-funded, bootstrapped company
-          serving Global Fortune 500 customers. Our commitment to innovation and excellence
-          has positioned us as leaders in the AI and machine learning industry.
+          TDI is an AI-first professional services company specializing in process and 
+          workflow automation through applied artificial intelligence. Headquartered in Singapore 
+          with a full delivery base in Bangladesh, we partner with enterprises and high-growth 
+          organizations to redesign how work gets done—replacing slow, manual workflows 
+          with intelligent, automated systems.
         </motion.p>
 
         {/* Leadership Cards */}

@@ -9,16 +9,24 @@ import TestimonialSlider from "@/components/TestimonialSlider";
 import Leadership from "@/components/Leadership";
 import { LayeredSlide } from "@/components/LayeredSlide";
 import { WebGLTransitionProvider } from "@/components/WebGLTransitionProvider";
+import { ClientSegments } from "@/components/ClientSegments";
+import { ProcessTimeline } from "@/components/ProcessTimeline";
+import { WhyTDI } from "@/components/WhyTDI";
+import { CTASection } from "@/components/CTASection";
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const sections = [
-    <Technology />,
     <SolutionsGrid />,
+    <ClientSegments />,
+    <ProcessTimeline />,
+    <WhyTDI />,
+    <Technology />,
     <Products />,
     <TestimonialSlider />,
-    <Leadership />
+    <Leadership />,
+    <CTASection />
   ];
 
   return (

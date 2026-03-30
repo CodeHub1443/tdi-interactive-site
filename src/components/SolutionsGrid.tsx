@@ -7,18 +7,33 @@ import { motion } from "framer-motion";
 const solutions = [
   {
     id: "01",
-    title: "ML Ops",
-    description: "ML Ops at TDI streamlines machine learning workflows through advanced techniques. Time-domain autocorrelation captures temporal and causal dynamics between predictors and target variables for accurate forecasting.",
+    title: "AI Agent Development",
+    description: "Build the agents that run your operations—not just assist them. We design and build purpose-built AI agents that autonomously execute complex, multi-step tasks end-to-end.",
   },
   {
     id: "02",
-    title: "Forecasting",
-    description: "By integrating diverse data sources, including historical data, external factors, and market dynamics, businesses can gain deep insights into evolving consumer preferences and market conditions.",
+    title: "Workflow Automation",
+    description: "Replace manual coordination with intelligent, automated pipelines. TDI replaces repetitive decision-making and fragmented data movement with seamless automated integration.",
   },
   {
     id: "03",
-    title: "Marketing Analytics",
-    description: "Forecast sales and media effectiveness with 90-95% accuracy over 18 months, enabling forward-looking strategies and capitalizing on future market opportunities. Enhance customer loyalty and revenue.",
+    title: "Custom AI Integration",
+    description: "Purpose-built AI systems for processes standard tools cannot handle. We design bespoke systems for factory floors, logistics networks, and document-heavy environments.",
+  },
+  {
+    id: "04",
+    title: "MVP Development",
+    description: "AI-native products built to ship—not just to demonstrate. We provides end-to-end MVP development that combines product engineering with applied AI from day one.",
+  },
+  {
+    id: "05",
+    title: "AI Strategy & Advisory",
+    description: "Invest in the right AI, avoid the wrong ones. Implementation-grounded strategy and advisory engagements to map your operational landscape and design a roadmap.",
+  },
+  {
+    id: "06",
+    title: "Talent Augmentation",
+    description: "Specialized AI practitioners who deliver from day one. Access experienced AI engineers, agent developers, and NLP specialists to accelerate your product development.",
   },
 ];
 
@@ -40,92 +55,76 @@ const itemVariants = {
 
 const SolutionsGrid: React.FC = () => {
   return (
-    <section className="bg-[#050a0a] text-white w-full h-full flex items-center py-12 md:py-16 border-t border-white/5 overflow-hidden">
+    <section className="bg-[#050a0a] text-white w-full h-full flex flex-col py-16 md:py-20 border-t border-white/5 overflow-hidden relative">
       <motion.div 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-10%" }}
+        viewport={{ once: true, margin: "-5%" }}
         variants={containerVariants}
-        className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 xl:grid-cols-[1fr_2.5fr] gap-12 lg:gap-24"
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full h-full flex flex-col justify-center"
       >
         
-        {/* Left Side: Sticky or static CTA group */}
-        <motion.div variants={itemVariants} className="flex flex-col items-start gap-8">
-          <div className="border border-accentTeal/30 text-accentTeal text-xs font-semibold px-4 py-1.5 rounded-full mt-2">
-            Enterprise Solutions
-          </div>
+        {/* Header Block - More compact */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-10 lg:mb-12">
+          <motion.div variants={itemVariants} className="max-w-3xl">
+            <div className="inline-block border border-accentTeal/30 text-accentTeal text-[9px] uppercase tracking-widest font-bold px-3 py-1 rounded-full mb-4">
+              Enterprise Solutions
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.1] tracking-tight text-white mb-4">
+              Six Core Workflow Automation Services
+            </h2>
+            <p className="text-white/40 text-xs md:text-sm leading-relaxed max-w-xl font-light">
+              Harness the power of autonomous AI agents and intelligent pipelines to streamline complex operational hurdles.
+            </p>
+          </motion.div>
           
-          <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-sm mt-4 lg:mt-32">
-            Harness the power of advanced analytics and machine learning for unparalleled insights and performance.
-          </p>
-          
-          <button className="flex items-center gap-3 border border-white/30 rounded-full px-6 py-3 text-sm hover:bg-white hover:text-black transition-all mb-4">
-            Get Started <span className="text-lg leading-none">→</span>
-          </button>
-        </motion.div>
+          <motion.div variants={itemVariants} className="shrink-0 flex items-end">
+            <Link href="/solutions" className="flex items-center gap-3 bg-white text-black rounded-full px-6 py-3 text-xs font-semibold hover:bg-accentTeal hover:text-white transition-all">
+              View All Services <span className="text-sm leading-none">→</span>
+            </Link>
+          </motion.div>
+        </div>
 
-        {/* Right Side: Headlines and Grid */}
-        <div className="flex flex-col">
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl lg:text-[56px] font-normal leading-[1.1] mb-12 max-w-4xl tracking-tight">
-            Tailored Ai Solutions to Enhance <br className="hidden md:block"/>
-            Your Business Performance
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-            
-            {/* Header/Title Card within Grid */}
-            <motion.div variants={itemVariants} className="bg-[#0c1414] border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col justify-center min-h-[300px]">
-              <div className="w-8 h-8 rounded-full bg-accentTeal/10 flex items-center justify-center mb-6">
-                <span className="text-accentTeal text-xl">⚙</span>
-              </div>
-              <h3 className="text-xl md:text-2xl font-light leading-snug">
-                <span className="font-semibold text-white">Enterprise AI:</span> Optimizing <br/>
-                ML Ops for Accurate <br/>
-                Forecasting
-              </h3>
-            </motion.div>
-
-            {/* Feature Cards Loop */}
-            {solutions.map((solution) => (
-              <motion.div 
-                key={solution.id} 
-                variants={itemVariants}
-                className="group relative bg-[#0c1414] border border-white/5 hover:border-accentTeal/30 rounded-2xl p-8 lg:p-10 flex flex-col transition-all duration-500 overflow-hidden min-h-[300px]"
-              >
-                <div className="flex items-center justify-between mb-8 z-10 w-full relative">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-white/5 rounded-md flex items-center justify-center text-white/50">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg md:text-xl font-medium tracking-wide">
-                      {solution.title}
-                    </h3>
+        {/* Services Grid - Very compact cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+          {solutions.map((solution) => (
+            <motion.div 
+              key={solution.id} 
+              variants={itemVariants}
+              className="group relative bg-[#0c1414] border border-white/5 hover:border-accentTeal/30 rounded-2xl p-6 lg:p-7 flex flex-col transition-all duration-500 overflow-hidden min-h-[220px] lg:min-h-[240px]"
+            >
+              <div className="flex items-center justify-between mb-5 z-10 w-full relative">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-accentTeal">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                   </div>
-                  
-                  <Link href="#" className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center -rotate-45 group-hover:bg-white group-hover:text-black transition-colors z-20">
-                    <span className="text-sm">→</span>
-                  </Link>
-                </div>
-
-                <p className="text-sm text-white/40 leading-relaxed z-10 relative pr-4">
-                  {solution.description}
-                </p>
-
-                {/* Giant Number Subtext */}
-                <div className="absolute bottom-0 right-4 translate-y-1/4 select-none opacity-20 group-hover:opacity-40 group-hover:-translate-y-2 transition-all duration-700 ease-out z-0">
-                  <span className="text-[120px] font-light tracking-tighter leading-none text-white font-mono">
-                    {solution.id}
-                  </span>
+                  <h3 className="text-base md:text-lg font-medium tracking-wide">
+                    {solution.title}
+                  </h3>
                 </div>
                 
-                {/* Hover Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accentTeal/0 via-transparent to-accentTeal/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              </motion.div>
-            ))}
-            
-          </div>
+                <Link href="/solutions" className="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center -rotate-45 group-hover:bg-white group-hover:text-black transition-colors z-20">
+                  <span className="text-xs">→</span>
+                </Link>
+              </div>
+
+              <p className="text-xs md:text-sm text-white/40 leading-relaxed z-10 relative pr-2 font-light">
+                {solution.description}
+              </p>
+
+              {/* Giant Number Subtext - More subtle */}
+              <div className="absolute bottom-2 right-4 select-none opacity-[0.03] group-hover:opacity-10 transition-all duration-700 ease-out z-0">
+                <span className="text-[70px] font-bold tracking-tighter leading-none text-white font-mono">
+                  {solution.id}
+                </span>
+              </div>
+              
+              {/* Hover Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accentTeal/0 via-transparent to-accentTeal/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            </motion.div>
+          ))}
         </div>
 
       </motion.div>

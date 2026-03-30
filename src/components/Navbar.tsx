@@ -30,11 +30,12 @@ const Navbar: React.FC = () => {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { name: "Solutions", href: "#" },
-    { name: "Technology", href: "#" },
-    { name: "Case Studies", href: "#" },
-    { name: "Insights", href: "#" },
-    { name: "About", href: "#" },
+    { name: "Solutions", href: "/solutions" },
+    { name: "Technology", href: "/technology" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Insights", href: "/insights" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (

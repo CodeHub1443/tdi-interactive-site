@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 const products = [
   {
     id: "001",
-    title: "Quantum MI",
-    description: "Optimize your supply chain with our innovative solutions. We provide precise forecasts and analytical tools to improve",
+    title: "Operational AI Agents",
+    description: "Build the agents that run your operations. We build agents for Sales, Operations, and Support that reason and execute tasks autonomously.",
     pattern: (
       <div className="absolute inset-0 flex items-center justify-center opacity-60">
         <svg viewBox="0 0 200 100" className="w-full h-full" fill="none" opacity="0.3">
@@ -22,8 +22,8 @@ const products = [
   },
   {
     id: "002",
-    title: "Quantum Data Lake",
-    description: "Optimize your supply chain with our innovative solutions. We provide precise forecasts and analytical tools to improve",
+    title: "Intelligent Pipelines",
+    description: "Replace manual coordination with automated pipelines for document processing, reporting, and cross-platform data synchronization.",
     pattern: (
       <div className="absolute inset-0 flex items-center justify-center opacity-60 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_2px,transparent_2px)] bg-[size:16px_16px]">
         {/* Simple diagonal slash for decoration */}
@@ -33,8 +33,8 @@ const products = [
   },
   {
     id: "003",
-    title: "Bespoke Products",
-    description: "Optimize your supply chain with our innovative solutions. We provide precise forecasts and analytical tools to improve",
+    title: "Visual Automation",
+    description: "AI systems for production line quality inspection, automated defect detection, and continuous real-time operational monitoring.",
     pattern: (
       <div className="absolute inset-0 flex items-center justify-center opacity-60 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:8px_8px]">
       </div>
