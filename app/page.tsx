@@ -18,8 +18,8 @@ export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const sections = [
-    <SolutionsGrid />,
     <ClientSegments />,
+    <SolutionsGrid />,
     <ProcessTimeline />,
     <WhyTDI />,
     <Technology />,

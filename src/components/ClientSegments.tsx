@@ -4,12 +4,12 @@ import React from "react";
 import { MetricsWall } from "./MetricsBrickWall/MetricsWall";
 
 const logos = [
-  { src: "/logos/Syncoria Greyscale.svg", alt: "Syncoria", imgClass: "h-8 md:h-10" },
-  { src: "/logos/Tech Matters Greyscale.svg", alt: "Tech Matters", imgClass: "h-8 md:h-11" },
-  { src: "/logos/bangladesh-army-seeklogo greyscale.svg", alt: "Bangladesh Army", imgClass: "h-10 md:h-12" },
-  { src: "/logos/grameenphone-original-seeklogo greyscale.svg", alt: "Grameenphone", imgClass: "h-8 md:h-10 scale-[1.3] md:scale-[1.5]" },
-  { src: "/logos/unilever-seeklogo greyscale.svg", alt: "Unilever", imgClass: "h-10 md:h-12" },
-  { src: "/logos/university-of-toronto-seeklogo greyscale.svg", alt: "University of Toronto", imgClass: "h-8 md:h-9" },
+  { src: "/logos/Syncoria Greyscale.svg", alt: "Syncoria", imgClass: "h-10 md:h-12" },
+  { src: "/logos/Tech Matters Greyscale.svg", alt: "Tech Matters", imgClass: "h-12 md:h-14 scale-110" },
+  { src: "/logos/bangladesh-army-seeklogo greyscale.svg", alt: "Bangladesh Army", imgClass: "h-14 md:h-16 scale-[0.85]" },
+  { src: "/logos/grameenphone-original-seeklogo greyscale.svg", alt: "Grameenphone", imgClass: "h-14 md:h-16 scale-[2.0] md:scale-[2.5]" },
+  { src: "/logos/unilever-seeklogo greyscale.svg", alt: "Unilever", imgClass: "h-12 md:h-14" },
+  { src: "/logos/university-of-toronto-seeklogo greyscale.svg", alt: "University of Toronto", imgClass: "h-10 md:h-12" },
 ];
 
 export const ClientSegments: React.FC = () => {
@@ -39,7 +39,7 @@ export const ClientSegments: React.FC = () => {
               {[...logos, ...logos].map((logo, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-center shrink-0 w-[140px] md:w-[180px] h-16 md:h-20 mx-4 md:mx-6 opacity-90 hover:opacity-100 transition-opacity duration-300"
+                  className="flex items-center justify-center shrink-0 w-[170px] md:w-[220px] h-20 md:h-24 mx-4 md:mx-6 opacity-90 hover:opacity-100 transition-opacity duration-300"
                 >
                   <img
                     src={logo.src}
