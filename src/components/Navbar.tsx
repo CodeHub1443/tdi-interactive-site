@@ -47,11 +47,10 @@ const Navbar: React.FC = () => {
       <nav
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`fixed top-0 left-0 right-0 z-50 h-[80px] flex items-center transition-all duration-300 ${
-          isActive
-            ? "bg-white shadow-xl rounded-b-[32px] border-b border-gray-100"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 h-[80px] flex items-center transition-all duration-300 ${isActive
+          ? "bg-white shadow-xl rounded-b-[32px] border-b border-gray-100"
+          : "bg-transparent"
+          }`}
       >
         <div className="max-w-[1800px] mx-auto w-full px-6 flex justify-between items-center">
           {/* Left side: Logo */}
@@ -60,12 +59,12 @@ const Navbar: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center shrink-0"
           >
-            <Image 
-              src={isActive ? "/TDI_logo_Black.svg" : "/TDI_logo_White.svg"} 
-              alt="TDI Logo" 
-              width={100} 
-              height={32} 
-              className="h-8 w-auto mix-blend-normal transition-opacity duration-300"
+            <Image
+              src={isActive ? "/TDI_logo_Black.svg" : "/TDI_logo_White.svg"}
+              alt="TDI Logo"
+              width={20}
+              height={100}
+              className="h-20 w-auto mix-blend-normal transition-opacity duration-300"
               priority
             />
           </Link>
@@ -77,9 +76,8 @@ const Navbar: React.FC = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className={`text-sm font-medium transition-colors duration-300 ${
-                      isActive ? "text-textDark hover:text-accentTeal" : "text-white/90 hover:text-white"
-                    }`}
+                    className={`text-sm font-medium transition-colors duration-300 ${isActive ? "text-textDark hover:text-accentTeal" : "text-white/90 hover:text-white"
+                      }`}
                   >
                     {link.name}
                   </Link>
@@ -98,9 +96,8 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button (Hamburger/Close) */}
           <button
-            className={`lg:hidden p-2 -mr-2 transition-colors duration-300 ${
-              isActive ? "text-textDark" : "text-white"
-            }`}
+            className={`lg:hidden p-2 -mr-2 transition-colors duration-300 ${isActive ? "text-textDark" : "text-white"
+              }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -119,9 +116,8 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out lg:hidden ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full pt-[100px] px-6 pb-12 overflow-y-auto">
           <ul className="flex flex-col gap-6 text-2xl font-light mb-12">
@@ -147,7 +143,7 @@ const Navbar: React.FC = () => {
             >
               Request Automation Audit
             </Link>
-            
+
             <p className="text-sm text-textMuted text-center mt-6 font-light">
               TDI © {new Date().getFullYear()} Modern Enterprise
             </p>

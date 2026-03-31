@@ -13,19 +13,19 @@ const leaders = [
   {
     role: "CHAIRMAN AND CO-FOUNDER",
     name: "Riyadh Hossain",
-    image: "https://i.pravatar.cc/800?img=11",
+    image: "/Riyadh.png",
     key: true,
   },
   {
     role: "COO AND CO-FOUNDER",
     name: "Intisar Tahmid Naheen",
-    image: "https://i.pravatar.cc/800?img=68",
+    image: "/Intisar.png",
     key: true,
   },
   {
     role: "HEAD OF AI SYSTEMS",
-    name: "James Okafor",
-    image: "https://i.pravatar.cc/800?img=33",
+    name: "Tanvir Tabassum",
+    image: "/Tanvir.png",
     key: false,
   },
 ];
@@ -51,7 +51,7 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
       className={`relative rounded-2xl md:rounded-3xl overflow-hidden bg-[#111] flex-shrink-0 shadow-2xl group
         ${isKeyPerson
           ? "w-[240px] sm:w-[280px] md:w-[320px] lg:w-[380px] h-[320px] sm:h-[360px] md:h-[420px] lg:h-[480px] z-20 -translate-y-6 sm:-translate-y-8 md:-translate-y-10"
-          : "w-[160px] sm:w-[200px] md:w-[230px] lg:w-[270px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[390px] z-10 opacity-70 hover:opacity-100 transition-opacity duration-500"
+          : "w-[160px] sm:w-[200px] md:w-[230px] lg:w-[270px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[390px] z-10 opacity-70 hover:opacity-100 transition-opacity duration-500 -translate-y-4 sm:-translate-y-5"
         }`}
     >
       {/* Full-bleed photo */}
@@ -122,7 +122,7 @@ const Leadership: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
         viewport={{ once: true }}
-        className="text-sm md:text-base text-gray-500 dark:text-white/50 font-light text-center max-w-2xl leading-relaxed mb-16 md:mb-24 px-6"
+        className="text-sm md:text-base text-gray-500 dark:text-white/50 font-light text-center max-w-2xl leading-relaxed mb-10 md:mb-14 px-6"
       >
         TDI is an AI-first professional services company specializing in process and
         workflow automation through applied artificial intelligence. Headquartered in Singapore
