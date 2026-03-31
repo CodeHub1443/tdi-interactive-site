@@ -43,48 +43,61 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
+  hidden: { opacity: 0, scale: 0.95, y: 15 },
   visible: { 
-    opacity: 1, x: 0, 
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+    opacity: 1, scale: 1, y: 0, 
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } 
   },
 };
 
 export const WhyTDI: React.FC = () => {
   return (
-    <section className="bg-white py-24 md:py-32 dark:bg-[#050a0a] border-t border-gray-100 dark:border-white/5">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-        <div className="mb-16 md:mb-24">
-          <h2 className="text-sm uppercase tracking-[0.2em] text-accentTeal font-bold mb-4">Why The Data Island</h2>
-          <h3 className="text-4xl md:text-5xl font-normal leading-tight tracking-tight text-textDark dark:text-white max-w-2xl">
-            Built for the Real World, Managed End-to-End, Built to Last.
+    <section className="bg-[#050a0a] py-8 md:py-12 border-t border-white/5 min-h-screen flex flex-col justify-center items-center overflow-hidden">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-8 flex-1 flex flex-col justify-center">
+        
+        {/* Header - Compacted */}
+        <div className="mb-8 md:mb-12 border-l-[3px] border-[#6CF2B0] pl-6">
+          <h2 className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#6CF2B0] font-bold mb-2">Why The Data Island</h2>
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-white max-w-3xl">
+            Built for the Real World. Managed End-to-End.
           </h3>
         </div>
 
+        {/* 2-Column Comparison Grid to half the vertical height */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-5%" }}
           variants={containerVariants}
-          className="flex flex-col border-t border-gray-100 dark:border-white/10"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-6 pt-6 border-t border-white/10"
         >
           {comparisons.map((item, idx) => (
-            <motion.div key={idx} variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-[1.5fr_2fr] border-b border-gray-100 dark:border-white/10 py-10 lg:py-16 gap-8 group">
+            <motion.div key={idx} variants={itemVariants} className="flex flex-col gap-3 p-4 sm:p-5 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10 transition-colors group">
+              
+              {/* Challenge */}
               <div className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-4 opacity-70">Challenge</span>
-                <h4 className="text-lg md:text-xl font-medium text-textDark dark:text-white leading-snug">
+                <span className="text-[8px] sm:text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1.5 flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-red-400/50" /> Challenge
+                </span>
+                <h4 className="text-sm font-medium text-white/90 leading-snug">
                   {item.challenge}
                 </h4>
               </div>
-              <div className="flex flex-col border-l-0 lg:border-l border-gray-100 dark:border-white/10 lg:pl-16">
-                <span className="text-[10px] uppercase tracking-widest text-accentTeal font-bold mb-4 opacity-100">TDI Response</span>
-                <p className="text-sm md:text-base text-textMuted dark:text-white/60 leading-relaxed font-light">
+
+              {/* Response */}
+              <div className="flex flex-col pl-4 sm:pl-5 border-l border-[#6CF2B0]/30 mt-1">
+                <span className="text-[8px] sm:text-[9px] uppercase tracking-widest text-[#6CF2B0] font-bold mb-1.5 flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-[#6CF2B0]" /> TDI Response
+                </span>
+                <p className="text-[11px] sm:text-xs text-white/60 leading-relaxed font-light">
                   {item.response}
                 </p>
               </div>
+
             </motion.div>
           ))}
         </motion.div>
+        
       </div>
     </section>
   );

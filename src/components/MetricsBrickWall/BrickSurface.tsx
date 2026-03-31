@@ -18,16 +18,16 @@ interface BrickDef {
 
 const BRICKS: BrickDef[] = [
   // Row 1 (y=0) — 3 bricks
-  { id: 1, x: 0,   y: 0,   metric: { value: 60,  suffix: "+", label: "Projects Completed",  delay: 0   } },
-  { id: 2, x: 320, y: 0,   metric: { value: 120, suffix: "+", label: "Engineers Available", delay: 150 } },
+  { id: 1, x: 0, y: 0, metric: { value: 60, suffix: "+", label: "Projects Completed", delay: 0 } },
+  { id: 2, x: 320, y: 0, metric: { value: 120, suffix: "+", label: "Engineers Available", delay: 150 } },
   { id: 3, x: 640, y: 0 },
   // Row 2 (y=160) — 2 offset bricks
   { id: 4, x: 160, y: 160 },
   { id: 5, x: 480, y: 160 },
   // Row 3 (y=320) — 3 bricks
-  { id: 6, x: 0,   y: 320, metric: { value: 25, suffix: "+", label: "AI Systems Deployed", delay: 300 } },
+  { id: 6, x: 0, y: 320, metric: { value: 25, suffix: "+", label: "AI Systems Deployed", delay: 300 } },
   { id: 7, x: 320, y: 320 },
-  { id: 8, x: 640, y: 320, metric: { value: 8,  suffix: "+", label: "Industries Served",   delay: 450 } },
+  { id: 8, x: 640, y: 320, metric: { value: 8, suffix: "+", label: "Industries Served", delay: 450 } },
 ];
 
 interface BrickSurfaceProps {
@@ -38,8 +38,8 @@ interface BrickSurfaceProps {
 
 export const BrickSurface: React.FC<BrickSurfaceProps> = ({ inView, mouseX, mouseY }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const brickRefs    = useRef<Map<number, HTMLDivElement>>(new Map());
-  const frameRef     = useRef<number>(0);
+  const brickRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const frameRef = useRef<number>(0);
 
   const updateGlow = useCallback(() => {
     if (!containerRef.current || mouseX < -100) return;
@@ -56,12 +56,12 @@ export const BrickSurface: React.FC<BrickSurfaceProps> = ({ inView, mouseX, mous
       const brickCX = (brick.x + BRICK_W / 2) * scale;
       const brickCY = (brick.y + BRICK_H / 2) * scale;
       const dist = Math.sqrt((localMX - brickCX) ** 2 + (localMY - brickCY) ** 2);
-      const proximity  = Math.max(0, 1 - dist / GLOW_RADIUS);
+      const proximity = Math.max(0, 1 - dist / GLOW_RADIUS);
       const edgeOpacity = Math.pow(proximity, 1.5) * 0.8;
 
       el.style.setProperty("--edge-glow", String(edgeOpacity));
-      el.style.setProperty("--local-mx",  `${localMX - brick.x * scale}px`);
-      el.style.setProperty("--local-my",  `${localMY - brick.y * scale}px`);
+      el.style.setProperty("--local-mx", `${localMX - brick.x * scale}px`);
+      el.style.setProperty("--local-my", `${localMY - brick.y * scale}px`);
     });
 
     frameRef.current = requestAnimationFrame(updateGlow);
@@ -84,13 +84,13 @@ export const BrickSurface: React.FC<BrickSurfaceProps> = ({ inView, mouseX, mous
             key={brick.id}
             ref={el => {
               if (el) brickRefs.current.set(brick.id, el);
-              else    brickRefs.current.delete(brick.id);
+              else brickRefs.current.delete(brick.id);
             }}
             className="absolute"
             style={{
-              left:   `${(brick.x / TOTAL_W) * 100}%`,
-              top:    `${(brick.y / TOTAL_H) * 100}%`,
-              width:  `${(BRICK_W / TOTAL_W) * 100}%`,
+              left: `${(brick.x / TOTAL_W) * 100}%`,
+              top: `${(brick.y / TOTAL_H) * 100}%`,
+              width: `${(BRICK_W / TOTAL_W) * 100}%`,
               height: `${(BRICK_H / TOTAL_H) * 100}%`,
             }}
           >
