@@ -49,8 +49,9 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({ active, mouseX, mo
     window.addEventListener("resize", resize);
 
     const spawnParticle = (): Particle => {
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
+      const rect = canvas.getBoundingClientRect();
+      const mx = mouseRef.current.x - rect.left;
+      const my = mouseRef.current.y - rect.top;
       const spread = 80;
       const maxLife = 1500 + Math.random() * 1500; // 1.5–3s
       return {

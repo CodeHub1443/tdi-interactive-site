@@ -5,12 +5,12 @@ import Image from "next/image";
 import { MetricsWall } from "./MetricsBrickWall/MetricsWall";
 
 const logos = [
-  { src: "/logos/Syncoria Greyscale.svg", alt: "Syncoria", width: 120 },
-  { src: "/logos/Tech Matters Greyscale.svg", alt: "Tech Matters", width: 120 },
-  { src: "/logos/bangladesh-army-seeklogo greyscale.svg", alt: "Bangladesh Army", width: 80 },
-  { src: "/logos/grameenphone-original-seeklogo greyscale.svg", alt: "Grameenphone", width: 120 },
-  { src: "/logos/unilever-seeklogo greyscale.svg", alt: "Unilever", width: 100 },
-  { src: "/logos/university-of-toronto-seeklogo greyscale.svg", alt: "University of Toronto", width: 140 },
+  { src: "/logos/Syncoria Greyscale.svg", alt: "Syncoria" },
+  { src: "/logos/Tech Matters Greyscale.svg", alt: "Tech Matters" },
+  { src: "/logos/bangladesh-army-seeklogo greyscale.svg", alt: "Bangladesh Army" },
+  { src: "/logos/grameenphone-original-seeklogo greyscale.svg", alt: "Grameenphone" },
+  { src: "/logos/unilever-seeklogo greyscale.svg", alt: "Unilever" },
+  { src: "/logos/university-of-toronto-seeklogo greyscale.svg", alt: "University of Toronto" },
 ];
 
 export const ClientSegments: React.FC = () => {
@@ -18,8 +18,8 @@ export const ClientSegments: React.FC = () => {
     <section className="bg-[#010404] border-t border-white/5 w-full overflow-hidden">
       
       {/* ── Trusted By + Marquee ────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-24 md:py-28">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-12 md:py-14">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
 
           <div className="w-full lg:w-[280px] shrink-0 text-center lg:text-left">
             <h2
@@ -40,14 +40,14 @@ export const ClientSegments: React.FC = () => {
               {[...logos, ...logos].map((logo, idx) => (
                 <div
                   key={idx}
-                  className="inline-flex items-center justify-center shrink-0 mx-10 opacity-35 hover:opacity-90 grayscale hover:grayscale-0 transition-all duration-500"
+                  className="inline-flex items-center justify-center shrink-0 mx-12 opacity-65 hover:opacity-100 grayscale transition-all duration-300"
                 >
                   <Image
                     src={logo.src}
                     alt={logo.alt}
-                    width={logo.width}
-                    height={56}
-                    className="object-contain h-10 md:h-12 w-auto"
+                    width={160}
+                    height={60}
+                    className="object-contain h-8 md:h-10 w-32 md:w-36"
                   />
                 </div>
               ))}

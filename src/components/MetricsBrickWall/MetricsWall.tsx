@@ -26,9 +26,7 @@ export const MetricsWall: React.FC = () => {
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setMousePos({ x: e.clientX, y: e.clientY });
   }, []);
 
   const handleMouseEnter = useCallback(() => {
@@ -53,7 +51,7 @@ export const MetricsWall: React.FC = () => {
       onMouseLeave={handleMouseLeave}
     >
       {/* Brick wall — height driven by BrickSurface paddingBottom aspect ratio */}
-      <div className="relative z-10 w-full max-w-[1260px] mx-auto px-4 py-10">
+      <div className="relative z-10 w-full max-w-[1260px] mx-auto px-4 py-2">
         <BrickSurface
           inView={inView}
           mouseX={mousePos.x}
@@ -74,8 +72,8 @@ export const MetricsWall: React.FC = () => {
         style={{
           zIndex: 20,
           background: [
-            "linear-gradient(to right,  #010404 0%, transparent 15%, transparent 85%, #010404 100%)",
-            "linear-gradient(to bottom, #010404 0%, transparent 15%, transparent 85%, #010404 100%)",
+            "linear-gradient(to right,  #010404 0%, transparent 10%, transparent 90%, #010404 100%)",
+            "linear-gradient(to bottom, #010404 0%, transparent 10%, transparent 95%, #010404 100%)",
           ].join(", "),
         }}
       />
