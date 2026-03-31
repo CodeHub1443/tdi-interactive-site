@@ -36,18 +36,16 @@ export const ClientSegments: React.FC = () => {
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#010404] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#010404] to-transparent z-10 pointer-events-none" />
 
-            <div className="flex whitespace-nowrap animate-marquee">
+            <div className="flex whitespace-nowrap animate-marquee items-center py-6">
               {[...logos, ...logos].map((logo, idx) => (
                 <div
                   key={idx}
-                  className="inline-flex items-center justify-center shrink-0 mx-12 opacity-65 hover:opacity-100 grayscale transition-all duration-300"
+                  className="flex items-center justify-center shrink-0 w-32 h-12 md:w-56 md:h-16 mx-4 md:mx-8 opacity-90 hover:opacity-100 transition-opacity duration-300"
                 >
-                  <Image
+                  <img
                     src={logo.src}
                     alt={logo.alt}
-                    width={160}
-                    height={60}
-                    className="object-contain h-8 md:h-10 w-32 md:w-36"
+                    className="max-h-full max-w-[80%] md:max-w-full object-contain grayscale brightness-[2.2] contrast-125"
                   />
                 </div>
               ))}
