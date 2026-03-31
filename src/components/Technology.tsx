@@ -36,35 +36,181 @@ const techItems = [
   },
   {
     id: "004",
-    title: "Stack Integration",
+    title: "Staff Augmentation",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
-    description: "Direct integration with Salesforce, Slack, AWS, and Supabase plus custom API connectors for connecting legacy systems with modern SaaS platforms.",
+    description: "Embed senior AI engineers and automation specialists directly into your teams. Flexible engagements that scale with your pipeline — no long-term overhead.",
   },
 ];
 
-const AbstractTriangleGraphic = () => (
-  <svg viewBox="0 0 400 400" className="w-full h-full opacity-60" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* Simplified abstract dotted wireframe representation */}
-    <g stroke="white" strokeWidth="1" opacity="0.4" strokeDasharray="2 4">
-      <path d="M200 50L350 250H50L200 50Z" />
-      <path d="M200 80L320 230H80L200 80Z" />
-      <path d="M200 110L290 210H110L200 110Z" />
-      
-      <path d="M150 250L300 350H50L150 250Z" />
-      <path d="M280 150L380 320H220L280 150Z" />
-      
-      {/* Connecting nodes */}
-      <circle cx="200" cy="50" r="2" fill="white" />
-      <circle cx="350" cy="250" r="2" fill="white" />
-      <circle cx="50" cy="250" r="2" fill="white" />
-    </g>
-  </svg>
-);
+/* ─── Dot helpers ─── */
+function Dot({ cx, cy, r = 1.8 }: { cx: number; cy: number; r?: number }) {
+  return <circle cx={cx} cy={cy} r={r} fill="white" opacity={0.55} />;
+}
 
+function dotGrid(
+  x0: number, y0: number,
+  cols: number, rows: number,
+  gap: number,
+): { cx: number; cy: number }[] {
+  const pts: { cx: number; cy: number }[] = [];
+  for (let r = 0; r < rows; r++)
+    for (let c = 0; c < cols; c++)
+      pts.push({ cx: x0 + c * gap, cy: y0 + r * gap });
+  return pts;
+}
+
+/* ─── Shape 1: Concentric triangles (item 001) ─── */
+const TriangleShape = () => {
+  const rings = [
+    "M200 60 L355 295 H45 Z",
+    "M200 95 L325 270 H75 Z",
+    "M200 130 L295 245 H105 Z",
+    "M200 165 L265 220 H135 Z",
+  ];
+  return (
+    <svg viewBox="0 0 400 360" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {rings.map((d, i) => (
+        <motion.path
+          key={i}
+          d={d}
+          stroke="white"
+          strokeWidth={0.8}
+          strokeDasharray="3 6"
+          opacity={0}
+          animate={{ opacity: [0, 0.35, 0.35, 0], strokeDashoffset: [0, -60] }}
+          transition={{ duration: 6, delay: i * 0.6, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+      {/* Corner nodes */}
+      {[{ cx: 200, cy: 60 }, { cx: 355, cy: 295 }, { cx: 45, cy: 295 }].map((p, i) => (
+        <motion.circle
+          key={i} cx={p.cx} cy={p.cy} r={2.5} fill="white"
+          animate={{ opacity: [0.3, 0.9, 0.3] }}
+          transition={{ duration: 2.5, delay: i * 0.5, repeat: Infinity }}
+        />
+      ))}
+    </svg>
+  );
+};
+
+/* ─── Shape 2: Concentric circles (item 002) ─── */
+const CircleShape = () => {
+  const radii = [120, 90, 60, 35];
+  return (
+    <svg viewBox="0 0 400 360" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {radii.map((r, i) => (
+        <motion.circle
+          key={i}
+          cx={200} cy={180} r={r}
+          stroke="white"
+          strokeWidth={0.8}
+          strokeDasharray="4 7"
+          opacity={0}
+          animate={{ opacity: [0, 0.3, 0.3, 0], strokeDashoffset: [0, 80] }}
+          transition={{ duration: 7, delay: i * 0.7, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+      {/* Dot ring at 35° intervals */}
+      {Array.from({ length: 10 }).map((_, i) => {
+        const angle = (i / 10) * 2 * Math.PI;
+        return (
+          <motion.circle
+            key={`n-${i}`}
+            cx={200 + 125 * Math.cos(angle)}
+            cy={180 + 125 * Math.sin(angle)}
+            r={1.8} fill="white"
+            animate={{ opacity: [0.15, 0.7, 0.15] }}
+            transition={{ duration: 2.5, delay: i * 0.22, repeat: Infinity }}
+          />
+        );
+      })}
+    </svg>
+  );
+};
+
+/* ─── Shape 3: Grid / mesh (item 003) ─── */
+const GridShape = () => {
+  const pts = dotGrid(60, 60, 8, 7, 40);
+  return (
+    <svg viewBox="0 0 400 360" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Horizontal dashed lines */}
+      {Array.from({ length: 7 }).map((_, r) => (
+        <motion.line
+          key={`h-${r}`}
+          x1={60} y1={60 + r * 40} x2={340} y2={60 + r * 40}
+          stroke="white" strokeWidth={0.7} strokeDasharray="3 7"
+          animate={{ opacity: [0, 0.25, 0.25, 0], strokeDashoffset: [0, -50] }}
+          transition={{ duration: 5, delay: r * 0.3, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+      {/* Vertical dashed lines */}
+      {Array.from({ length: 8 }).map((_, c) => (
+        <motion.line
+          key={`v-${c}`}
+          x1={60 + c * 40} y1={60} x2={60 + c * 40} y2={300}
+          stroke="white" strokeWidth={0.7} strokeDasharray="3 7"
+          animate={{ opacity: [0, 0.2, 0.2, 0], strokeDashoffset: [0, -50] }}
+          transition={{ duration: 5, delay: c * 0.25 + 0.1, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+      {pts.map((p, i) => (
+        <motion.circle
+          key={i} cx={p.cx} cy={p.cy} r={1.5} fill="white"
+          animate={{ opacity: [0.1, 0.6, 0.1] }}
+          transition={{ duration: 2 + (i % 4) * 0.3, delay: (i * 0.09) % 2, repeat: Infinity }}
+        />
+      ))}
+    </svg>
+  );
+};
+
+/* ─── Shape 4: Hexagon (item 004) ─── */
+function hexPoints(cx: number, cy: number, r: number) {
+  return Array.from({ length: 6 }).map((_, i) => {
+    const a = (Math.PI / 3) * i - Math.PI / 6;
+    return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
+  }).join(" ");
+}
+
+const HexShape = () => {
+  const sizes = [130, 95, 62, 32];
+  return (
+    <svg viewBox="0 0 400 360" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {sizes.map((r, i) => (
+        <motion.polygon
+          key={i}
+          points={hexPoints(200, 180, r)}
+          stroke="white" strokeWidth={0.8} strokeDasharray="4 8"
+          opacity={0}
+          animate={{ opacity: [0, 0.3, 0.3, 0], strokeDashoffset: [0, -70] }}
+          transition={{ duration: 6.5, delay: i * 0.65, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+      {/* Vertices of outer hex */}
+      {Array.from({ length: 6 }).map((_, i) => {
+        const a = (Math.PI / 3) * i - Math.PI / 6;
+        return (
+          <motion.circle
+            key={i}
+            cx={200 + 130 * Math.cos(a)}
+            cy={180 + 130 * Math.sin(a)}
+            r={2.2} fill="white"
+            animate={{ opacity: [0.2, 0.85, 0.2] }}
+            transition={{ duration: 2.2, delay: i * 0.35, repeat: Infinity }}
+          />
+        );
+      })}
+    </svg>
+  );
+};
+
+const shapes = [TriangleShape, CircleShape, GridShape, HexShape];
+
+/* ─── Animation variants ─── */
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -75,37 +221,38 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, y: 0, 
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+  visible: {
+    opacity: 1, y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
+/* ─── Component ─── */
 const Technology: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(3);
+  const ActiveShape = shapes[activeIndex];
 
   return (
     <section className="bg-[#0a1212] text-white py-12 md:py-16 w-full h-full flex items-center overflow-hidden">
-      <motion.div 
+      <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={containerVariants}
         className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24"
       >
-        
-        {/* Left Column: List and Titles */}
+        {/* Left Column */}
         <div className="flex flex-col h-full justify-between">
           <motion.div variants={itemVariants}>
             <div className="inline-block border border-white/20 rounded-full px-4 py-1.5 text-xs tracking-wide text-white/70 mb-8">
               Technology
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.15] mb-8">
-              Leading-Edge Technology <br className="hidden xl:block" />
-              for Machine Learning
+              Enterprise AI Automation <br className="hidden xl:block" />
+              Capabilities
             </h2>
-            
+
             <button className="flex items-center gap-3 border border-white/30 rounded-full px-6 py-3 text-sm hover:bg-white hover:text-black transition-all mb-16 lg:mb-24 w-max">
               Contact Us <span className="text-lg leading-none">→</span>
             </button>
@@ -116,7 +263,7 @@ const Technology: React.FC = () => {
               <span>Select an item</span>
               <span>{activeIndex + 1}/{techItems.length}</span>
             </div>
-            
+
             <div className="flex flex-col gap-2">
               {techItems.map((item, idx) => {
                 const isActive = activeIndex === idx;
@@ -124,11 +271,10 @@ const Technology: React.FC = () => {
                   <button
                     key={item.id}
                     onClick={() => setActiveIndex(idx)}
-                    className={`flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-300 text-left ${
-                      isActive 
-                        ? "bg-white/10 border border-white/20" 
+                    className={`flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-300 text-left ${isActive
+                        ? "bg-white/10 border border-white/20"
                         : "bg-transparent border border-transparent hover:bg-white/5"
-                    }`}
+                      }`}
                   >
                     <div className={`p-2 rounded-lg ${isActive ? "bg-white/15" : "bg-white/5"} text-white/70`}>
                       {item.icon}
@@ -146,22 +292,35 @@ const Technology: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Right Column: Interactive Card Display */}
+        {/* Right Column: Interactive Card */}
         <motion.div variants={itemVariants} className="relative w-full h-[500px] lg:h-auto lg:min-h-[700px] flex items-stretch">
           <div className="w-full h-full relative rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent overflow-hidden flex flex-col p-8 md:p-12">
-            
+
             {/* Top Indicator */}
             <div className="flex items-center justify-between text-xs font-mono text-white/50 z-10 w-full relative">
               <span>/ {techItems[activeIndex].id}</span>
-              <span className="font-sans font-bold text-white/30 text-lg tracking-widest">TDI<span className="text-[10px] font-normal tracking-normal ml-2 opacity-50">Machine<br/>Technologies</span></span>
+              <span className="font-sans font-bold text-white/30 text-lg tracking-widest">
+                TDI<span className="text-[10px] font-normal tracking-normal ml-2 opacity-50">Machine<br />Technologies</span>
+              </span>
             </div>
 
-            {/* Abstract Graphic Area */}
+            {/* Animated Shape Area — transitions with activeIndex */}
             <div className="absolute inset-0 top-12 left-12 right-12 bottom-[250px] flex items-center justify-center pointer-events-none">
-              <AbstractTriangleGraphic />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`shape-${activeIndex}`}
+                  className="w-full h-full opacity-60"
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 0.6, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.06 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <ActiveShape />
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            {/* Bottom Content Area */}
+            {/* Bottom Content */}
             <div className="mt-auto relative z-10 w-full max-w-lg border-t border-white/10 pt-8 pt-[clamp(2rem,5vh,4rem)]">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -180,13 +339,12 @@ const Technology: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
             </div>
-            
-            {/* Decorative background gradients */}
+
+            {/* Decorative background */}
             <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accentTeal/10 blur-[100px] rounded-full pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-50 mix-blend-overlay" />
           </div>
         </motion.div>
-
       </motion.div>
     </section>
   );
