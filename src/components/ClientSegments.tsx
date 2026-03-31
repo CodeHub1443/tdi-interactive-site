@@ -1,16 +1,15 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { MetricsWall } from "./MetricsBrickWall/MetricsWall";
 
 const logos = [
-  { src: "/logos/Syncoria Greyscale.svg", alt: "Syncoria" },
-  { src: "/logos/Tech Matters Greyscale.svg", alt: "Tech Matters" },
-  { src: "/logos/bangladesh-army-seeklogo greyscale.svg", alt: "Bangladesh Army" },
-  { src: "/logos/grameenphone-original-seeklogo greyscale.svg", alt: "Grameenphone" },
-  { src: "/logos/unilever-seeklogo greyscale.svg", alt: "Unilever" },
-  { src: "/logos/university-of-toronto-seeklogo greyscale.svg", alt: "University of Toronto" },
+  { src: "/logos/Syncoria Greyscale.svg", alt: "Syncoria", imgClass: "h-8 md:h-10" },
+  { src: "/logos/Tech Matters Greyscale.svg", alt: "Tech Matters", imgClass: "h-8 md:h-11" },
+  { src: "/logos/bangladesh-army-seeklogo greyscale.svg", alt: "Bangladesh Army", imgClass: "h-10 md:h-12" },
+  { src: "/logos/grameenphone-original-seeklogo greyscale.svg", alt: "Grameenphone", imgClass: "h-8 md:h-10 scale-[1.3] md:scale-[1.5]" },
+  { src: "/logos/unilever-seeklogo greyscale.svg", alt: "Unilever", imgClass: "h-10 md:h-12" },
+  { src: "/logos/university-of-toronto-seeklogo greyscale.svg", alt: "University of Toronto", imgClass: "h-8 md:h-9" },
 ];
 
 export const ClientSegments: React.FC = () => {
@@ -36,16 +35,16 @@ export const ClientSegments: React.FC = () => {
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#010404] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#010404] to-transparent z-10 pointer-events-none" />
 
-            <div className="flex whitespace-nowrap animate-marquee items-center py-6">
+            <div className="logo-grid flex whitespace-nowrap animate-marquee items-center py-6">
               {[...logos, ...logos].map((logo, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-center shrink-0 w-32 h-12 md:w-56 md:h-16 mx-4 md:mx-8 opacity-90 hover:opacity-100 transition-opacity duration-300"
+                  className="flex items-center justify-center shrink-0 w-[140px] md:w-[180px] h-16 md:h-20 mx-4 md:mx-6 opacity-90 hover:opacity-100 transition-opacity duration-300"
                 >
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="max-h-full max-w-[80%] md:max-w-full object-contain grayscale brightness-[2.2] contrast-125"
+                    className={`max-w-full w-auto object-contain grayscale brightness-[2.2] contrast-125 ${logo.imgClass || "h-10 md:h-12"}`}
                   />
                 </div>
               ))}

@@ -88,7 +88,9 @@ const Navbar: React.FC = () => {
             {/* Primary CTA button */}
             <Link
               href="#"
-              className="bg-accentTeal text-white px-6 py-3 rounded-button text-sm font-semibold hover:opacity-90 transition-all duration-300 shadow-md"
+              className={`px-6 py-3 rounded-button text-sm font-semibold text-white transition-all duration-300 shadow-md hover:opacity-90 ${
+                isHovered ? "bg-black" : "bg-accentTeal"
+              }`}
             >
               Request Automation Audit
             </Link>
