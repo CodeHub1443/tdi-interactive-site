@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
               alt="TDI Logo"
               width={20}
               height={100}
-              className="h-20 w-auto mix-blend-normal transition-opacity duration-300"
+              className="h-14 md:h-20 w-auto mix-blend-normal transition-opacity duration-300"
               priority
             />
           </Link>

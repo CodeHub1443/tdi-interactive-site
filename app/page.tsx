@@ -18,35 +18,35 @@ export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const sections = [
-    <ClientSegments />,
-    <SolutionsGrid />,
-    <ProcessTimeline />,
-    <WhyTDI />,
-    <Technology />,
-    <Products />,
-    <TestimonialSlider />,
-    <Leadership />,
-    <CTASection />
+    ClientSegments,
+    SolutionsGrid,
+    ProcessTimeline,
+    WhyTDI,
+    Technology,
+    Products,
+    TestimonialSlider,
+    Leadership,
+    CTASection,
   ];
 
   return (
     <div 
       ref={scrollContainerRef}
-      className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory bg-black scroll-smooth"
+      className="h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
     >
-      <LayeredSlide index={0} className="w-full h-screen" containerRef={scrollContainerRef}>
+      <LayeredSlide index={0} className="w-full min-h-[100svh]" containerRef={scrollContainerRef}>
         <Hero />
       </LayeredSlide>
       <WebGLTransitionProvider>
         <main className="flex-1 w-full flex flex-col items-center">
-          {sections.map((section, idx) => (
+          {sections.map((Section, idx) => (
             <LayeredSlide 
               key={idx} 
               index={idx + 1} 
-              className="w-full h-screen"
+              className="w-full min-h-[100svh]"
               containerRef={scrollContainerRef}
             >
-              {section}
+              <Section />
             </LayeredSlide>
           ))}
         </main>
