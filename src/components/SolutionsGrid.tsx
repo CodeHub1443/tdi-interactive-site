@@ -76,14 +76,14 @@ const SolutionsGrid: React.FC = () => {
       solutions.forEach((sol, i) => {
         const pulse = `.pulse-${i}`;
         gsap.fromTo(pulse, 
-          { strokeDashoffset: 100 }, // Starts 100px before the line begins (hidden)
+          { strokeDashoffset: 100 }, 
           { 
-            strokeDashoffset: -600, // Move 600px along the line (guaranteed to reach end)
+            strokeDashoffset: -600, 
             duration: 2.5, 
-            ease: "none", // Linear speed for lasers
+            ease: "none", 
             repeat: -1,
-            repeatDelay: 1.5 + Math.random() * 2.5, // Random gaps between loops
-            delay: 2.5 + sol.delay, // Stagger initial launch times
+            repeatDelay: 1.5 + Math.random() * 2.5, 
+            delay: 2.5 + sol.delay, 
           }
         );
       });
@@ -94,7 +94,7 @@ const SolutionsGrid: React.FC = () => {
         gsap.fromTo(pulse, 
           { strokeDashoffset: 100 },
           { 
-            strokeDashoffset: -400, // Downward length is 312, 400 easily clears
+            strokeDashoffset: -400, 
             duration: 2.0, 
             ease: "none",
             repeat: -1,
@@ -109,7 +109,7 @@ const SolutionsGrid: React.FC = () => {
   }, [isInView]);
 
   return (
-    <section className="bg-[#050a0a] text-white w-full min-h-screen py-32 border-t border-white/5 relative overflow-visible">
+    <section className="bg-[#050a0a] text-white w-full min-h-screen py-16 md:py-24 border-t border-white/5 relative overflow-visible">
       
       {/* Background Graphic */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(0,230,230,0.03)_0%,transparent_70%)] pointer-events-none" />
@@ -117,14 +117,14 @@ const SolutionsGrid: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
         {/* Headlines */}
-        <div className="w-full text-center max-w-3xl mx-auto mb-20 lg:mb-0 lg:absolute lg:top-[-40px] lg:left-1/2 lg:-translate-x-1/2 shrink-0 z-40 lg:pointer-events-none">
-          <div className="inline-block border border-accentTeal/30 text-accentTeal text-[10px] uppercase tracking-widest font-bold px-4 py-1.5 rounded-full mb-6">
+        <div className="w-full text-center max-w-3xl mx-auto mb-16 lg:mb-0 lg:absolute lg:top-[-60px] lg:left-1/2 lg:-translate-x-1/2 shrink-0 z-40 lg:pointer-events-none">
+          <div className="inline-block border border-accentTeal/30 text-accentTeal text-[9px] sm:text-[10px] uppercase tracking-widest font-bold px-4 py-1.5 rounded-full mb-6">
             Enterprise Solutions
           </div>
-          <h2 className="text-4xl md:text-5xl font-normal leading-tight tracking-tight text-white mb-6">
-            Six core workflow<br className="hidden lg:block"/> Automation services
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal leading-tight tracking-tight text-white mb-4 md:mb-6 px-4">
+            Six Core Workflow<br className="hidden sm:block"/> Automation Services
           </h2>
-          <p className="text-white/40 text-sm md:text-base leading-relaxed font-light mb-10 mx-auto max-w-xl">
+          <p className="text-white/40 text-sm md:text-base leading-relaxed font-light mb-8 md:mb-10 mx-auto max-w-xl px-4">
             Harness the power of autonomous AI agents and intelligent pipelines to elevate enterprise efficiency.
           </p>
           <Link href="/solutions" className="inline-flex items-center gap-3 bg-white text-black rounded-full px-8 py-3 text-sm font-semibold hover:bg-accentTeal hover:text-white transition-all shadow-xl pointer-events-auto">
@@ -132,8 +132,26 @@ const SolutionsGrid: React.FC = () => {
           </Link>
         </div>
 
-        {/* AI Network Visualization */}
-        <div className="w-full max-w-[1200px] mx-auto relative flex justify-center mt-12 lg:mt-32">
+        {/* Mobile Card Grid — hidden on lg+ */}
+        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mt-12 sm:mt-16">
+          {solutions.map((sol, i) => (
+            <Link
+              key={i}
+              href="/solutions"
+              className="group flex flex-col gap-3 p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-accentTeal/40 hover:bg-white/5 transition-all duration-300"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-mono text-white/30">{sol.id}</span>
+                <h4 className="text-white font-medium text-base">{sol.title}</h4>
+              </div>
+              <p className="text-white/40 text-xs leading-relaxed font-light">{sol.description}</p>
+              <span className="text-accentTeal text-[10px] font-bold uppercase tracking-widest mt-2 px-1">Explore →</span>
+            </Link>
+          ))}
+        </div>
+
+        {/* AI Network Visualization — desktop only */}
+        <div className="hidden lg:flex w-full max-w-[1200px] mx-auto relative justify-center mt-12 lg:mt-32">
           <div ref={containerRef} className="relative w-full aspect-square md:aspect-[1.5/1]">
             
             {/* SVG Connections & Pulses */}
@@ -166,13 +184,13 @@ const SolutionsGrid: React.FC = () => {
                   key={`pulse-${i}`}
                   className={`pulse-beam pulse-${i}`}
                   d={sol.path}
-                  stroke="url(#laser)" // Fading tail gradient
+                  stroke="url(#laser)"
                   strokeWidth="2" 
                   fill="none"
                   strokeLinejoin="round"
-                  strokeDasharray="80 1000" // 80px long tail, massive gap
-                  strokeDashoffset="100" // Initial offset hidden
-                  style={{ filter: "drop-shadow(0px 0px 8px #f97316)" }} // Orange glow
+                  strokeDasharray="80 1000"
+                  strokeDashoffset="100"
+                  style={{ filter: "drop-shadow(0px 0px 8px #f97316)" }}
                 />
               ))}
 
@@ -209,7 +227,6 @@ const SolutionsGrid: React.FC = () => {
             {/* Central Core Node (AI Chip) */}
             <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
               <div className="core-node relative w-32 h-32 md:w-44 md:h-44 bg-[#0a0a0a] border border-white/5 rounded-[24px] md:rounded-[32px] flex flex-col items-center justify-center shadow-[0_0_80px_rgba(255,255,255,0.03)] overflow-hidden" style={{ opacity: 0 }}>
-                {/* Circuit-like inner shadow & bg */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent z-0" />
                 
@@ -229,15 +246,12 @@ const SolutionsGrid: React.FC = () => {
                 style={{
                   top: `${(sol.cy / 800) * 100}%`,
                   left: `${(sol.cx / 1000) * 100}%`,
-                  transform: 'translate(-50%, -50%)' // Wrapper stays centered
+                  transform: 'translate(-50%, -50%)' 
                 }}
                 onMouseEnter={() => setActiveNode(i)}
                 onMouseLeave={() => setActiveNode(null)}
               >
-                {/* Microchip Sub Box (Animated by GSAP) */}
                 <div className="service-node relative" style={{ opacity: 0 }}>
-                  
-                  {/* Icon Box (Reverted back to dark blocks) */}
                   <div className={`relative group cursor-pointer w-12 h-12 md:w-16 md:h-16 flex flex-col items-center justify-center bg-[#0a0a0a] border ${activeNode === i ? 'border-white/30 shadow-[0_0_30px_rgba(255,255,255,0.1)]' : 'border-white/10 shadow-xl'} rounded-2xl hover:border-white/20 transition-all duration-500 overflow-hidden z-20`}>
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className={`text-[10px] md:text-sm font-medium tracking-widest transition-colors duration-300 ${activeNode === i ? 'text-white' : 'text-white/50'}`}>
@@ -245,7 +259,6 @@ const SolutionsGrid: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Always Visible Desktop Text Label */}
                   <div className={`hidden lg:block absolute pointer-events-auto z-10 ${sol.textPos} ${sol.textWidth}`}>
                     <h4 className="text-white font-medium text-base mb-1 tracking-tight">{sol.title}</h4>
                     <p className="text-white/40 text-[11px] leading-relaxed font-light">{sol.description}</p>
@@ -253,13 +266,11 @@ const SolutionsGrid: React.FC = () => {
                       Explore <span className="text-xs">→</span>
                     </Link>
                   </div>
-
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Mobile Info Panel (only visible on small screens) */}
           <div className="lg:hidden w-full max-w-sm mx-auto px-4 z-40 relative mt-[-20%]">
             <div className={`w-full bg-[#0a1212] border transition-all duration-500 rounded-2xl p-6 shadow-2xl ${activeNode !== null ? 'border-accentTeal opacity-100 translate-y-0' : 'border-white/5 opacity-80 translate-y-2'}`}>
               {activeNode !== null ? (

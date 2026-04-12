@@ -74,7 +74,7 @@ export default function SolutionsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-white mb-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
               Full-Spectrum <br/><span className="text-accentTeal">AI Automation</span>
             </h1>
             <p className="text-white/50 text-lg md:text-xl lg:text-2xl font-light leading-relaxed">
@@ -86,9 +86,9 @@ export default function SolutionsPage() {
 
       {/* Services Breakdown */}
       {serviceSections.map((section, idx) => (
-        <section key={idx} className={`${section.bgColor} py-24 md:py-40 border-b border-white/5`}>
+        <section key={idx} className={`${section.bgColor} py-16 md:py-24 lg:py-40 border-b border-white/5`}>
           <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-32">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-32">
               <div>
                 <span className="text-xs font-bold tracking-[0.3em] text-accentTeal uppercase mb-6 block">/ 0{idx + 1} Service Line</span>
                 <h2 className="text-3xl md:text-5xl font-normal leading-tight text-white mb-6">{section.title}</h2>

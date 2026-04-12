@@ -14,7 +14,7 @@ const logos = [
 
 export const ClientSegments: React.FC = () => {
   return (
-    <section className="bg-[#010404] border-t border-white/5 w-full overflow-hidden">
+    <section aria-label="Trusted Clients" className="bg-[#010404] border-t border-white/5 w-full overflow-hidden">
       
       {/* ── Trusted By + Marquee ────────────────────────────── */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-12 md:py-14">
@@ -35,10 +35,11 @@ export const ClientSegments: React.FC = () => {
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#010404] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#010404] to-transparent z-10 pointer-events-none" />
 
-            <div className="logo-grid flex whitespace-nowrap animate-marquee items-center py-6">
+            <div className="logo-grid flex whitespace-nowrap animate-marquee items-center py-6" role="marquee" aria-label="Client logos">
               {[...logos, ...logos].map((logo, idx) => (
                 <div
                   key={idx}
+                  aria-hidden={idx >= logos.length}
                   className="flex items-center justify-center shrink-0 w-[170px] md:w-[220px] h-20 md:h-24 mx-4 md:mx-6 opacity-90 hover:opacity-100 transition-opacity duration-300"
                 >
                   <img

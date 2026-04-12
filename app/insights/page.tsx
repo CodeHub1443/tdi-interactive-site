@@ -53,7 +53,7 @@ export default function InsightsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-white mb-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
               Automation <br/><span className="text-accentTeal">Insights</span>
             </h1>
             <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
@@ -63,9 +63,9 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="bg-black py-24 md:py-40">
+      <section className="bg-black py-16 md:py-24 lg:py-40">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12 md:gap-y-24">
             {insights.map((article, idx) => (
               <div key={idx} className="flex flex-col group cursor-pointer">
                 <div className="h-px bg-white/10 w-full mb-8" />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const techItems = [
@@ -8,7 +8,7 @@ const techItems = [
     id: "001",
     title: "AI Agent Development",
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
       </svg>
     ),
@@ -18,7 +18,7 @@ const techItems = [
     id: "002",
     title: "AI Copilots & Assistants",
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
       </svg>
     ),
@@ -28,7 +28,7 @@ const techItems = [
     id: "003",
     title: "Workflow Orchestration",
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
       </svg>
     ),
@@ -38,7 +38,7 @@ const techItems = [
     id: "004",
     title: "Staff Augmentation",
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
@@ -232,14 +232,29 @@ const Technology: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(3);
   const ActiveShape = shapes[activeIndex];
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent, idx: number) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        e.preventDefault();
+        setActiveIndex((idx + 1) % techItems.length);
+        (e.currentTarget.parentElement?.children[(idx + 1) % techItems.length] as HTMLElement)?.focus();
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        setActiveIndex((idx - 1 + techItems.length) % techItems.length);
+        (e.currentTarget.parentElement?.children[(idx - 1 + techItems.length) % techItems.length] as HTMLElement)?.focus();
+      }
+    },
+    []
+  );
+
   return (
-    <section className="bg-[#0a1212] text-white py-12 md:py-16 w-full h-full flex items-center overflow-hidden">
+    <section className="bg-[#0a1212] text-white py-12 md:py-16 w-full flex items-center overflow-hidden">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={containerVariants}
-        className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24"
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24"
       >
         {/* Left Column */}
         <div className="flex flex-col h-full justify-between">
@@ -253,37 +268,49 @@ const Technology: React.FC = () => {
               Capabilities
             </h2>
 
-            <button className="flex items-center gap-3 border border-white/30 rounded-full px-6 py-3 text-sm hover:bg-white hover:text-black transition-all mb-16 lg:mb-24 w-max">
+            <button className="flex items-center gap-3 border border-white/30 rounded-full px-6 py-3 text-sm hover:bg-white hover:text-black transition-all mb-8 lg:mb-24 w-max">
               Contact Us <span className="text-lg leading-none">→</span>
             </button>
           </motion.div>
 
           <motion.div variants={itemVariants} className="pb-4">
             <div className="flex justify-between items-center text-xs text-white/50 mb-6 uppercase tracking-wider font-semibold border-b border-white/10 pb-4">
-              <span>Select an item</span>
-              <span>{activeIndex + 1}/{techItems.length}</span>
+              <span id="tech-tab-label">Select a capability</span>
+              <span aria-live="polite" aria-atomic="true">{activeIndex + 1}/{techItems.length}</span>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div
+              role="tablist"
+              aria-labelledby="tech-tab-label"
+              aria-orientation="vertical"
+              className="flex flex-col gap-2"
+            >
               {techItems.map((item, idx) => {
                 const isActive = activeIndex === idx;
                 return (
                   <button
                     key={item.id}
+                    role="tab"
+                    id={`tech-tab-${item.id}`}
+                    aria-selected={isActive}
+                    aria-controls={`tech-panel-${item.id}`}
+                    tabIndex={isActive ? 0 : -1}
                     onClick={() => setActiveIndex(idx)}
-                    className={`flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-300 text-left ${isActive
+                    onKeyDown={(e) => handleKeyDown(e, idx)}
+                    className={`flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-300 text-left ${
+                      isActive
                         ? "bg-white/10 border border-white/20"
                         : "bg-transparent border border-transparent hover:bg-white/5"
-                      }`}
+                    }`}
                   >
-                    <div className={`p-2 rounded-lg ${isActive ? "bg-white/15" : "bg-white/5"} text-white/70`}>
+                    <div className={`p-2 rounded-lg ${isActive ? "bg-white/15" : "bg-white/5"} text-white/70`} aria-hidden="true">
                       {item.icon}
                     </div>
                     <span className={`text-sm md:text-base font-medium ${isActive ? "text-white" : "text-white/60"}`}>
                       {item.title}
                     </span>
                     {isActive && (
-                      <span className="ml-auto w-1.5 h-1.5 rounded-full bg-accentTeal" />
+                      <span aria-hidden="true" className="ml-auto w-1.5 h-1.5 rounded-full bg-accentTeal" />
                     )}
                   </button>
                 );
@@ -293,7 +320,7 @@ const Technology: React.FC = () => {
         </div>
 
         {/* Right Column: Interactive Card */}
-        <motion.div variants={itemVariants} className="relative w-full h-[500px] lg:h-auto lg:min-h-[700px] flex items-stretch">
+        <motion.div variants={itemVariants} className="relative w-full min-h-[420px] md:min-h-[560px] lg:h-auto lg:min-h-[700px] flex items-stretch">
           <div className="w-full h-full relative rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent overflow-hidden flex flex-col p-8 md:p-12">
 
             {/* Top Indicator */}
@@ -321,7 +348,12 @@ const Technology: React.FC = () => {
             </div>
 
             {/* Bottom Content */}
-            <div className="mt-auto relative z-10 w-full max-w-lg border-t border-white/10 pt-8 pt-[clamp(2rem,5vh,4rem)]">
+            <div
+              className="mt-auto relative z-10 w-full max-w-lg border-t border-white/10 pt-[clamp(2rem,5vh,4rem)]"
+              role="tabpanel"
+              id={`tech-panel-${techItems[activeIndex].id}`}
+              aria-labelledby={`tech-tab-${techItems[activeIndex].id}`}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}

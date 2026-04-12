@@ -1,56 +1,34 @@
-"use client"
+import { Metadata } from 'next';
+import HomeClient from './HomeClient';
 
-import React, { useRef } from "react";
-import Hero from "@/components/Hero";
-import Technology from "@/components/Technology";
-import SolutionsGrid from "@/components/SolutionsGrid";
-import Products from "@/components/Products";
-import TestimonialSlider from "@/components/TestimonialSlider";
-import Leadership from "@/components/Leadership";
-import { LayeredSlide } from "@/components/LayeredSlide";
-import { WebGLTransitionProvider } from "@/components/WebGLTransitionProvider";
-import { ClientSegments } from "@/components/ClientSegments";
-import { ProcessTimeline } from "@/components/ProcessTimeline";
-import { WhyTDI } from "@/components/WhyTDI";
-import { CTASection } from "@/components/CTASection";
+export const metadata: Metadata = {
+  title: 'Home | The Data Island',
+  description: 'The Data Island (TDI) provides scalable AI automation, seamless workflows, and full lifecycle engineering exclusively for enterprise production environments.',
+  alternates: {
+    canonical: 'https://thedataisland.com',
+  },
+  openGraph: {
+    title: 'The Data Island (TDI) - Enterprise AI',
+    description: 'The Data Island (TDI) provides scalable AI automation, seamless workflows, and full lifecycle engineering exclusively for enterprise production environments.',
+    url: 'https://thedataisland.com',
+  },
+};
 
-export default function Home() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const sections = [
-    ClientSegments,
-    SolutionsGrid,
-    ProcessTimeline,
-    WhyTDI,
-    Technology,
-    Products,
-    TestimonialSlider,
-    Leadership,
-    CTASection,
-  ];
-
+export default function Page() {
   return (
-    <div 
-      ref={scrollContainerRef}
-      className="h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
-    >
-      <LayeredSlide index={0} className="w-full min-h-[100svh]" containerRef={scrollContainerRef}>
-        <Hero />
-      </LayeredSlide>
-      <WebGLTransitionProvider>
-        <main className="flex-1 w-full flex flex-col items-center">
-          {sections.map((Section, idx) => (
-            <LayeredSlide 
-              key={idx} 
-              index={idx + 1} 
-              className="w-full min-h-[100svh]"
-              containerRef={scrollContainerRef}
-            >
-              <Section />
-            </LayeredSlide>
-          ))}
-        </main>
-      </WebGLTransitionProvider>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "The Data Island",
+            "url": "https://thedataisland.com/"
+          })
+        }}
+      />
+      <HomeClient />
+    </>
   );
 }

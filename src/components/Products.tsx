@@ -74,7 +74,7 @@ const Products: React.FC = () => {
           Our Products
         </motion.div>
         
-        <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl font-light text-center mb-16 lg:mb-24 leading-snug">
+        <motion.h2 variants={itemVariants} className="text-2xl md:text-5xl font-light text-center mb-8 md:mb-16 lg:mb-24 leading-snug">
           Explore our Cutting-Edge <br className="hidden md:block"/>
           Machine Learning Products
         </motion.h2>
@@ -82,13 +82,14 @@ const Products: React.FC = () => {
         {/* Horizontal Slider/Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
           {products.map((product) => (
-            <motion.div 
+            <motion.article 
               key={product.id} 
               variants={itemVariants}
-              className="group bg-[#152525] hover:bg-[#1a2e2e] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col transition-all duration-300 min-h-[480px]"
+              aria-label={product.title}
+              className="group bg-[#152525] hover:bg-[#1a2e2e] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col transition-all duration-300 min-h-[300px] md:min-h-[420px]"
             >
               {/* Top Graphic Panel */}
-              <div className="relative h-56 border-b border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent flex items-start justify-end p-6">
+              <div aria-hidden="true" className="relative h-56 border-b border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent flex items-start justify-end p-6">
                 <span className="text-xs font-mono text-white/30 z-10 block">
                   / {product.id}
                 </span>
@@ -98,7 +99,7 @@ const Products: React.FC = () => {
               {/* Bottom Content Panel */}
               <div className="flex flex-col flex-1 p-8 lg:p-10 justify-center items-center text-center relative z-10">
                 <h3 className="text-xl md:text-2xl font-medium mb-4 flex items-center justify-center gap-2 group-hover:text-accentTeal transition-colors">
-                  {product.title} <span className="text-sm font-light leading-none">↗</span>
+                  {product.title} <span aria-hidden="true" className="text-sm font-light leading-none">&nearr;</span>
                 </h3>
                 <p className="text-sm text-white/40 leading-relaxed font-light px-2 mb-8 max-w-sm">
                   {product.description}
@@ -106,22 +107,23 @@ const Products: React.FC = () => {
                 
                 <Link 
                   href="#" 
+                  aria-label={`Learn more about ${product.title}`}
                   className="mt-auto text-xs uppercase tracking-widest font-semibold border-b border-white hover:text-accentTeal hover:border-accentTeal transition-all pb-1"
                 >
-                  Learn more &gt;
+                  Learn more
                 </Link>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
         {/* Navigation Arrows */}
-        <motion.div variants={itemVariants} className="flex gap-4 mt-16 text-white/40">
-          <button className="w-10 h-10 flex items-center justify-center hover:text-white transition-colors">
-            &larr;
+        <motion.div variants={itemVariants} className="flex gap-4 mt-16 text-white/40" role="group" aria-label="Product navigation">
+          <button aria-label="Previous products" className="w-10 h-10 flex items-center justify-center hover:text-white transition-colors">
+            <span aria-hidden="true">&larr;</span>
           </button>
-          <button className="w-10 h-10 flex items-center justify-center hover:text-white transition-colors">
-            &rarr;
+          <button aria-label="Next products" className="w-10 h-10 flex items-center justify-center hover:text-white transition-colors">
+            <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.div>
 

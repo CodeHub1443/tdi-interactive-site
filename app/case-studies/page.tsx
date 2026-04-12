@@ -54,7 +54,7 @@ export default function CaseStudiesPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-white mb-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
               Operational <br/><span className="text-accentTeal">Outcomes</span>
             </h1>
             <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
@@ -65,11 +65,11 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Case Studies Grid */}
-      <section className="bg-black py-24 md:py-40">
+      <section className="bg-black py-16 md:py-24 lg:py-40">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {caseStudies.map((caseStudy, idx) => (
-              <div key={idx} className="bg-[#0c1414] border border-white/5 rounded-3xl p-10 lg:p-14 group">
+              <div key={idx} className="bg-[#0c1414] border border-white/5 rounded-3xl p-6 md:p-10 lg:p-14 group">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-accentTeal mb-8 block">/ Case Study 0{idx + 1}</span>
                 <h2 className="text-sm font-bold tracking-widest text-white/40 uppercase mb-4">{caseStudy.industry}</h2>
                 <h3 className="text-xl md:text-2xl font-light leading-snug text-white mb-10 group-hover:text-accentTeal transition-colors">

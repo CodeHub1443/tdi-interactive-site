@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 interface LayeredSlideProps {
@@ -12,6 +12,16 @@ interface LayeredSlideProps {
 
 export const LayeredSlide: React.FC<LayeredSlideProps> = ({ children, className, index = 0, containerRef }) => {
   const elementRef = useRef<HTMLDivElement>(null)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  // Only enable parallax on lg+ screens
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)")
+    setIsDesktop(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
   
   // Track scroll progress of this section relative to the viewport/container
   const { scrollYProgress } = useScroll({
@@ -20,21 +30,17 @@ export const LayeredSlide: React.FC<LayeredSlideProps> = ({ children, className,
     offset: ["start end", "end start"]
   })
 
-  // Entrance and Exit transforms
-  // 0 - section enters bottom
-  // 0.5 - section is centered
-  // 1 - section leaves top
-  
-  const y = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], ["20vh", "0vh", "0vh", "-10vh"])
-  const scale = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], [0.85, 1, 1, 0.95])
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0])
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -5]) // Subtle 3D tilt
+  // Entrance and Exit transforms — only active on desktop
+  const y = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], isDesktop ? ["20vh", "0vh", "0vh", "-10vh"] : ["0vh", "0vh", "0vh", "0vh"])
+  const scale = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], isDesktop ? [0.85, 1, 1, 0.95] : [1, 1, 1, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], isDesktop ? [0, 1, 1, 0] : [1, 1, 1, 1])
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], isDesktop ? [15, 0, -5] : [0, 0, 0])
 
   return (
     <div 
       ref={elementRef} 
       className={`relative w-full overflow-visible min-h-[100svh] md:snap-start ${className}`}
-      style={{ perspective: "2000px" }}
+      style={{ perspective: isDesktop ? "2000px" : "none" }}
     >
       <motion.div
         style={{

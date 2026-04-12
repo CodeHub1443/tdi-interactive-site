@@ -1,19 +1,26 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import DotFieldShader from "@/components/DotFieldShader";
+import { trackEvent } from "@/lib/analytics";
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col bg-backgroundDark">
-      {/* TOP HERO STAGE - Adapts from 65% to natural on mobile */}
-      <div className="relative flex flex-col items-start lg:items-end justify-end pb-8 lg:pb-12 shrink-0 flex-1 lg:h-[65%]">
+    <section
+      aria-label="Hero — The Future of Work is Automated"
+      className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col bg-backgroundDark"
+    >
+      {/* Hidden H1 for screen readers — keeps heading hierarchy intact */}
+      <h1 className="sr-only">TDI — Intelligent Automation for Modern Enterprise</h1>
+      {/* TOP HERO STAGE */}
+      <div className="relative flex flex-col items-start lg:items-end justify-end pb-8 lg:pb-12 shrink-0 flex-1 min-h-[55vh] lg:h-[65%]">
         
         {/* WebGL Powered Dot Background */}
-        <div className="absolute inset-0 hero-gradient z-0" />
+        <div aria-hidden="true" className="absolute inset-0 hero-gradient z-0" />
         <DotFieldShader />
-        <div className="hero-vignette z-40" />
+        <div aria-hidden="true" className="hero-vignette z-40" />
 
         {/* Content aligned with navbar */}
         <motion.div 
@@ -34,16 +41,26 @@ const Hero: React.FC = () => {
             <p className="text-[10px] sm:text-[11px] uppercase tracking-wider text-white/50 mb-3 sm:mb-4 font-medium">
               Quick Contact With Us!
             </p>
-            <div className="flex gap-2 justify-start lg:justify-end">
-              <div className="w-10 h-10 sm:w-9 sm:h-9 rounded-md bg-white flex items-center justify-center cursor-pointer hover:bg-white/90 transition-all shadow-sm">
-                <span className="text-black font-bold text-xs">X</span>
-              </div>
-              <div className="w-10 h-10 sm:w-9 sm:h-9 rounded-md bg-white flex items-center justify-center cursor-pointer hover:bg-white/90 transition-all shadow-sm">
-                <span className="text-black font-bold text-xs">In</span>
-              </div>
-              <div className="w-10 h-10 sm:w-9 sm:h-9 rounded-md bg-white flex items-center justify-center cursor-pointer hover:bg-white/90 transition-all shadow-sm">
-                <span className="text-black font-bold text-xs">Ig</span>
-              </div>
+            {/* Social Links */}
+            <div className="flex gap-2 justify-start lg:justify-end mt-4 sm:mt-0" role="list" aria-label="Social media links">
+              {[
+                { label: "X", href: "https://x.com/thedataisland" },
+                { label: "In", href: "https://linkedin.com/company/thedataisland" },
+                { label: "Ig", href: "https://instagram.com/thedataisland" }
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="listitem"
+                  onClick={() => trackEvent("outbound_click", { link_url: s.href, link_text: s.label })}
+                  aria-label={`Follow TDI on ${s.label}`}
+                  className="w-10 h-10 sm:w-9 sm:h-9 rounded-md bg-white flex items-center justify-center hover:bg-white/90 transition-all shadow-sm"
+                >
+                  <span aria-hidden="true" className="text-black font-bold text-xs">{s.label}</span>
+                </a>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -70,10 +87,14 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="lg:pb-1 shrink-0 mt-2 lg:mt-0 w-full sm:w-auto">
-            <button className="w-full sm:w-auto justify-center bg-black text-white px-9 py-4 sm:py-3.5 rounded-full font-medium flex items-center gap-2.5 hover:bg-gray-900 transition-all shadow-lg group text-sm md:text-base">
+            <Link
+              href="/solutions"
+              onClick={() => trackEvent("cta_click", { cta_name: "Explore Solutions (Hero)" })}
+              className="w-full sm:w-auto justify-center bg-black text-white px-9 py-4 sm:py-3.5 rounded-full font-medium flex items-center gap-2.5 hover:bg-gray-900 transition-all shadow-lg group text-sm md:text-base"
+            >
               Explore Solutions
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
+              <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
           </div>
 
         </div>

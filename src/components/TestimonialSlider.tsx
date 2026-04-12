@@ -55,13 +55,16 @@ const Testimonials: React.FC = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="bg-white text-textDark w-full h-full flex items-center py-12 md:py-16">
+    <section
+      aria-label="Client testimonials"
+      className="bg-white text-textDark w-full flex items-center py-12 md:py-16"
+    >
       <motion.div 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={containerVariants}
-        className="max-w-[1800px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start"
+        className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start"
       >
         
         {/* Left Column: Headlines and Logos */}
@@ -76,8 +79,8 @@ const Testimonials: React.FC = () => {
             </h2>
           </motion.div>
 
-          {/* Partner Logos Strip */}
-          <motion.div variants={itemVariants} className="mt-16 lg:mt-32 w-full overflow-hidden flex gap-8 md:gap-12 opacity-50 grayscale select-none">
+          {/* Partner Logos Strip — decorative */}
+          <motion.div variants={itemVariants} aria-hidden="true" className="mt-10 lg:mt-32 w-full overflow-hidden flex gap-8 md:gap-12 opacity-50 grayscale select-none">
             {partners.map((partner, idx) => (
               <span key={idx} className="text-xl md:text-2xl font-bold font-sans whitespace-nowrap shrink-0">
                 {partner}
@@ -87,18 +90,32 @@ const Testimonials: React.FC = () => {
         </div>
 
         {/* Right Column: Testimonial Card */}
-        <motion.div variants={itemVariants} className="relative border-t border-gray-200 pt-10 mt-10 lg:mt-0 lg:border-t-0 lg:pt-0">
+        <motion.div
+          variants={itemVariants}
+          role="region"
+          aria-label="Testimonials"
+          aria-roledescription="carousel"
+          className="relative border-t border-gray-200 pt-10 mt-10 lg:mt-0 lg:border-t-0 lg:pt-0"
+        >
+          {/* Visually hidden live region so AT announces slide changes */}
+          <div aria-live="polite" aria-atomic="true" className="sr-only">
+            Testimonial {current + 1} of {testimonials.length}: {testimonials[current].name}, {testimonials[current].role}.
+          </div>
           
-          <div className="flex gap-6 mb-12 items-center">
+          <div className="flex gap-4 md:gap-6 mb-6 md:mb-12 items-center">
             {/* Quote Icon */}
-            <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center font-serif text-3xl text-gray-400 italic font-bold">
-              "
+            <div aria-hidden="true" className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center font-serif text-3xl text-gray-400 italic font-bold">
+              &ldquo;
             </div>
             
             {/* Avatar & Name */}
             <div className="flex items-center gap-4">
               <div className="relative w-16 h-16 rounded-full overflow-hidden grayscale">
-                <img src={testimonials[current].avatar} alt={testimonials[current].name} className="object-cover w-full h-full" />
+                <img
+                  src={testimonials[current].avatar}
+                  alt={`Portrait of ${testimonials[current].name}`}
+                  className="object-cover w-full h-full"
+                />
               </div>
               <div>
                 <h4 className="font-semibold text-lg">{testimonials[current].name}</h4>
@@ -108,27 +125,29 @@ const Testimonials: React.FC = () => {
           </div>
 
           {/* Quote Body */}
-          <p className="text-2xl md:text-3xl lg:text-[40px] font-light leading-[1.3] text-gray-800 mb-16">
+          <p className="text-xl md:text-3xl lg:text-[40px] font-light leading-[1.3] text-gray-800 mb-8 md:mb-16">
             <span className="text-gray-300">"</span>
             {testimonials[current].quote}
             <span className="text-gray-300">"</span>
           </p>
 
           {/* Nav Arrows */}
-          <div className="flex gap-8 text-gray-400">
+          <div className="flex gap-8 text-gray-400" role="group" aria-label="Testimonial navigation">
             <button 
               onClick={prev}
-              className="hover:text-black transition-colors"
+              aria-label={`Previous testimonial — ${testimonials[(current - 1 + testimonials.length) % testimonials.length].name}`}
+              className="hover:text-black transition-colors p-1"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
             </button>
             <button 
               onClick={next}
-              className="hover:text-black transition-colors"
+              aria-label={`Next testimonial — ${testimonials[(current + 1) % testimonials.length].name}`}
+              className="hover:text-black transition-colors p-1"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>

@@ -1,4 +1,24 @@
 /* Motion CSS */
+
+/* ─── Global Focus Styles (WCAG 2.1 AA) ─── */
+:focus-visible {
+  outline: 3px solid #6CF2B0;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced Motion (WCAG 2.1 AA 2.3.3) ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .animate-reveal {
   opacity: 0;
   transform: translateY(20px);

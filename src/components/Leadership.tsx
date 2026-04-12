@@ -39,7 +39,7 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
   const animate = { opacity: 1, x: "0px" };
 
   return (
-    <motion.div
+    <motion.article
       initial={initial}
       whileInView={animate}
       transition={{
@@ -48,17 +48,19 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
         ease: [0.16, 1, 0.3, 1] as const,
       }}
       viewport={{ once: true, margin: "-15%" }}
-      className={`relative rounded-2xl md:rounded-3xl overflow-hidden bg-[#111] flex-shrink-0 shadow-2xl group
+      tabIndex={0}
+      aria-label={`${leader.name}, ${leader.role}`}
+      className={`relative rounded-2xl md:rounded-3xl overflow-hidden bg-[#111] flex-shrink-0 snap-center shadow-2xl group focus:outline-none focus:ring-2 focus:ring-[#6CF2B0] focus-visible:ring-4
         ${isKeyPerson
-          ? "w-[240px] sm:w-[280px] md:w-[320px] lg:w-[380px] h-[320px] sm:h-[360px] md:h-[420px] lg:h-[480px] z-20 -translate-y-6 sm:-translate-y-8 md:-translate-y-10"
-          : "w-[160px] sm:w-[200px] md:w-[230px] lg:w-[270px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[390px] z-10 opacity-70 hover:opacity-100 transition-opacity duration-500 -translate-y-4 sm:-translate-y-5"
+          ? "w-[200px] xs:w-[240px] sm:w-[280px] md:w-[320px] lg:w-[380px] h-[280px] xs:h-[320px] sm:h-[360px] md:h-[420px] lg:h-[480px] z-20 -translate-y-4 sm:-translate-y-8 md:-translate-y-10"
+          : "w-[140px] xs:w-[160px] sm:w-[200px] md:w-[230px] lg:w-[270px] h-[230px] xs:h-[260px] sm:h-[300px] md:h-[340px] lg:h-[390px] z-10 opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity duration-500 -translate-y-2 sm:-translate-y-5"
         }`}
     >
       {/* Full-bleed photo */}
       <img
         src={leader.image}
-        alt={leader.name}
-        className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out"
+        alt={`Portrait of ${leader.name}`}
+        className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-focus:grayscale-0 group-hover:scale-105 group-focus:scale-105 transition-all duration-700 ease-in-out"
       />
 
       {/* Left-to-right shadow vignette */}
@@ -69,11 +71,15 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none z-10" />
 
       {/* Top-left: Role + Name */}
-      <div className="absolute top-0 left-0 z-20 p-5 md:p-6 lg:p-8 flex flex-col">
-        <p className="text-[9px] sm:text-[10px] text-white/50 tracking-widest font-semibold mb-1 uppercase">
+      <div className="absolute top-0 left-0 w-full z-20 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col pointer-events-none">
+        <p className={`text-white/60 font-semibold mb-1 uppercase break-words ${
+          isKeyPerson ? "text-[9px] sm:text-[10px] tracking-widest" : "text-[8px] sm:text-[9px] tracking-wider"
+        }`}>
           {leader.role}
         </p>
-        <h3 className={`text-white font-medium leading-tight ${isKeyPerson ? "text-base sm:text-lg md:text-xl lg:text-2xl" : "text-sm sm:text-base"}`}>
+        <h3 className={`text-white font-medium break-words leading-snug w-full ${
+          isKeyPerson ? "text-base sm:text-lg md:text-xl lg:text-3xl" : "text-sm sm:text-base lg:text-lg pr-2"
+        }`}>
           {leader.name}
         </h3>
       </div>
@@ -89,25 +95,27 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
           </span>
         </div>
       )}
-    </motion.div>
+    </motion.article>
   );
 };
 
 const Leadership: React.FC = () => {
   return (
-    <section className="bg-white dark:bg-[#010404] text-textDark dark:text-white w-full flex flex-col items-center py-16 md:py-24 overflow-hidden relative border-t border-gray-100 dark:border-white/5">
+    <section aria-labelledby="leadership-heading" className="bg-white dark:bg-[#010404] text-textDark dark:text-white w-full flex flex-col items-center py-16 md:py-24 overflow-hidden relative border-t border-gray-100 dark:border-white/5">
 
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        aria-hidden="true"
         className="border border-gray-200 dark:border-white/10 rounded-full px-4 py-1.5 text-[10px] tracking-widest text-accentTeal dark:text-[#6CF2B0] mb-8 uppercase font-mono font-bold"
       >
         Company
       </motion.div>
 
       <motion.h2
+        id="leadership-heading"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
@@ -131,7 +139,7 @@ const Leadership: React.FC = () => {
       </motion.p>
 
       {/* 4-Photo Row: outer two stay, inner two slide in from sides */}
-      <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 w-full max-w-[1300px] px-4 md:px-8">
+      <div className="flex flex-row items-end justify-start xl:justify-center gap-4 sm:gap-5 md:gap-6 w-full max-w-[1500px] px-6 md:px-8 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-none">
         {leaders.map((leader, i) => (
           <PhotoCard key={i} leader={leader} index={i} />
         ))}

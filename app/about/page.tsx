@@ -45,7 +45,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-white mb-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
               Built to <br/><span className="text-accentTeal">Last</span>
             </h1>
             <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
@@ -57,9 +57,9 @@ export default function AboutPage() {
 
       {/* Main Sections Breakdown */}
       {aboutSections.map((section, idx) => (
-        <section key={idx} className={`${section.bgColor} py-24 md:py-40 border-b border-white/5`}>
+        <section key={idx} className={`${section.bgColor} py-16 md:py-24 lg:py-40 border-b border-white/5`}>
           <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-32">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-32">
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-widest text-accentTeal mb-8 block">/ 0{idx + 1} Section</span>
                 <h2 className="text-3xl md:text-5xl font-normal leading-tight text-white mb-6 uppercase">{section.title}</h2>
