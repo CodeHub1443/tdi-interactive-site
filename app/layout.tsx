@@ -86,10 +86,12 @@ export default function RootLayout({
               },
               {
                 "@context": "https://schema.org",
-                "@type": "ProfessionalService",
-                "name": "The Data Island",
+                "@type": "Service",
                 "serviceType": "Enterprise AI Automation",
-                "url": "https://thedataisland.com"
+                "provider": {
+                  "@type": "Organization",
+                  "name": "The Data Island"
+                }
               }
             ])
           }}

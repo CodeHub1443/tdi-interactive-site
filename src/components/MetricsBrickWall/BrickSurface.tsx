@@ -73,73 +73,93 @@ export const BrickSurface: React.FC<BrickSurfaceProps> = ({ inView, mouseX, mous
   }, [updateGlow]);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full"
-      style={{ paddingBottom: `${(TOTAL_H / TOTAL_W) * 100}%` }}
-    >
-      <div className="absolute inset-0">
-        {BRICKS.map(brick => (
-          <div
-            key={brick.id}
-            ref={el => {
-              if (el) brickRefs.current.set(brick.id, el);
-              else brickRefs.current.delete(brick.id);
-            }}
-            className="absolute"
-            style={{
-              left: `${(brick.x / TOTAL_W) * 100}%`,
-              top: `${(brick.y / TOTAL_H) * 100}%`,
-              width: `${(BRICK_W / TOTAL_W) * 100}%`,
-              height: `${(BRICK_H / TOTAL_H) * 100}%`,
-            }}
-          >
-            {/* Base brick surface */}
-            <div className="absolute inset-0 rounded-lg"
-              style={{ background: "rgba(255,255,255,0.01)" }} />
-
-            {/* Faint structural border */}
-            <div className="absolute inset-0 rounded-lg pointer-events-none"
-              style={{ border: "1px solid rgba(255,255,255,0.05)" }} />
-
-            {/* Cursor-driven illumination */}
-            <div className="absolute inset-0 rounded-lg pointer-events-none"
-              style={{
-                background: "radial-gradient(circle 280px at var(--local-mx,-9999px) var(--local-my,-9999px), rgba(80,255,200,0.18), transparent 60%)",
-                zIndex: 1,
-              }}
-            />
-
-            {/* Edge glow */}
-            <div className="absolute inset-0 rounded-lg pointer-events-none"
-              style={{
-                boxShadow: "inset 0 0 0 1px rgba(80,255,200,var(--edge-glow,0))",
-                zIndex: 2,
-              }}
-            />
-
-            {/* Seam path glow */}
-            <div className="absolute inset-0 rounded-lg pointer-events-none"
-              style={{
-                boxShadow: "0 0 10px rgba(80,255,200,calc(var(--edge-glow,0)*0.6))",
-                zIndex: 2,
-              }}
-            />
-
+    <>
+      {/* Mobile Fallback: 2x2 Grid */}
+      <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-4 md:hidden py-8">
+        {BRICKS.filter(b => b.metric).map(brick => (
+          <div key={`mob-${brick.id}`} className="relative bg-white/5 border border-white/10 rounded-xl p-6 min-h-[140px] flex flex-col justify-center shadow-lg">
             {brick.metric && (
-              <div className="absolute inset-0 z-10">
-                <MetricBlock
-                  value={brick.metric.value}
-                  suffix={brick.metric.suffix}
-                  label={brick.metric.label}
-                  inView={inView}
-                  delay={brick.metric.delay}
-                />
-              </div>
+              <MetricBlock
+                value={brick.metric.value}
+                suffix={brick.metric.suffix}
+                label={brick.metric.label}
+                inView={inView}
+                delay={brick.metric.delay}
+              />
             )}
           </div>
         ))}
       </div>
-    </div>
+
+      {/* Desktop Asymmetric Canvas */}
+      <div
+        ref={containerRef}
+        className="relative w-full hidden md:block"
+        style={{ paddingBottom: `${(TOTAL_H / TOTAL_W) * 100}%` }}
+      >
+        <div className="absolute inset-0">
+          {BRICKS.map(brick => (
+            <div
+              key={brick.id}
+              ref={el => {
+                if (el) brickRefs.current.set(brick.id, el);
+                else brickRefs.current.delete(brick.id);
+              }}
+              className="absolute"
+              style={{
+                left: `${(brick.x / TOTAL_W) * 100}%`,
+                top: `${(brick.y / TOTAL_H) * 100}%`,
+                width: `${(BRICK_W / TOTAL_W) * 100}%`,
+                height: `${(BRICK_H / TOTAL_H) * 100}%`,
+              }}
+            >
+              {/* Base brick surface */}
+              <div className="absolute inset-0 rounded-lg"
+                style={{ background: "rgba(255,255,255,0.01)" }} />
+
+              {/* Faint structural border */}
+              <div className="absolute inset-0 rounded-lg pointer-events-none"
+                style={{ border: "1px solid rgba(255,255,255,0.05)" }} />
+
+              {/* Cursor-driven illumination */}
+              <div className="absolute inset-0 rounded-lg pointer-events-none"
+                style={{
+                  background: "radial-gradient(circle 280px at var(--local-mx,-9999px) var(--local-my,-9999px), rgba(80,255,200,0.18), transparent 60%)",
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Edge glow */}
+              <div className="absolute inset-0 rounded-lg pointer-events-none"
+                style={{
+                  boxShadow: "inset 0 0 0 1px rgba(80,255,200,var(--edge-glow,0))",
+                  zIndex: 2,
+                }}
+              />
+
+              {/* Seam path glow */}
+              <div className="absolute inset-0 rounded-lg pointer-events-none"
+                style={{
+                  boxShadow: "0 0 10px rgba(80,255,200,calc(var(--edge-glow,0)*0.6))",
+                  zIndex: 2,
+                }}
+              />
+
+              {brick.metric && (
+                <div className="absolute inset-0 z-10">
+                  <MetricBlock
+                    value={brick.metric.value}
+                    suffix={brick.metric.suffix}
+                    label={brick.metric.label}
+                    inView={inView}
+                    delay={brick.metric.delay}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
