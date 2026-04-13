@@ -68,12 +68,12 @@ export const CaseStudyPanel: React.FC<CaseStudyPanelProps> = ({ study }) => {
             </motion.h2>
             <motion.div variants={itemVariants} className="flex flex-wrap gap-12">
               <div>
-                <p className="text-blue-500 text-xs font-bold uppercase tracking-widest mb-1">Client / Industry</p>
+                <p className="text-accentTeal text-xs font-bold uppercase tracking-widest mb-1">Client / Industry</p>
                 <p className="text-white text-xl font-medium">{study.client || study.industry}</p>
               </div>
               {study.problem && (
                 <div>
-                  <p className="text-blue-500 text-xs font-bold uppercase tracking-widest mb-1">Problem</p>
+                  <p className="text-accentTeal text-xs font-bold uppercase tracking-widest mb-1">Problem</p>
                   <p className="text-white text-xl font-medium max-w-md line-clamp-2 md:line-clamp-none">{study.problem}</p>
                 </div>
               )}
@@ -81,7 +81,7 @@ export const CaseStudyPanel: React.FC<CaseStudyPanelProps> = ({ study }) => {
           </div>
           
           <motion.div variants={itemVariants} className="md:text-right">
-             <p className="text-blue-500 text-xs font-bold uppercase tracking-widest mb-1">System Architecture</p>
+             <p className="text-accentTeal text-xs font-bold uppercase tracking-widest mb-1">System Architecture</p>
              <p className="text-white/60 text-sm font-mono">{study.systemSummary}</p>
           </motion.div>
         </div>
@@ -98,7 +98,7 @@ export const CaseStudyPanel: React.FC<CaseStudyPanelProps> = ({ study }) => {
         {study.systemNote && (
           <motion.div 
             variants={itemVariants}
-            className="mb-16 p-4 border-l-2 border-blue-500 bg-blue-500/5 text-blue-100/70 italic text-sm font-light"
+            className="mb-16 p-4 border-l-2 border-accentTeal bg-accentTeal/5 text-white/70 italic text-sm font-light"
           >
             {study.systemNote}
           </motion.div>

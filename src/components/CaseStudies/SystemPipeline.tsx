@@ -46,7 +46,7 @@ export const SystemPipeline: React.FC<SystemPipelineProps> = ({ nodes, connectio
               y1="50%"
               x2={x2}
               y2="50%"
-              stroke="#3b82f6"
+              className="stroke-accentTeal"
               strokeWidth="2"
               strokeDasharray="4 4"
               initial={{ pathLength: 0, opacity: 0 }}
@@ -71,7 +71,7 @@ export const SystemPipeline: React.FC<SystemPipelineProps> = ({ nodes, connectio
           }}
           className="relative z-10 flex flex-col items-center"
         >
-          <div className="w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.8)] border-2 border-white mb-4" />
+          <div className="w-5 h-5 rounded-full bg-accentTeal shadow-[0_0_20px_rgba(14,77,77,0.8)] border-2 border-white mb-4" />
           <span className="text-[10px] md:text-sm font-semibold text-white/90 uppercase tracking-widest whitespace-nowrap">
             {node.label}
           </span>
