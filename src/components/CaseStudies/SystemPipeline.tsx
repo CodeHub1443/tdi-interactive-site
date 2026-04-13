@@ -30,14 +30,6 @@ export const SystemPipeline: React.FC<SystemPipelineProps> = ({ nodes, connectio
       
       {/* Connections with animations */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
-            <stop offset="50%" stopColor="#3b82f6" stopOpacity="1" />
-            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        
         {connections.map((conn, i) => {
           const fromIdx = nodes.findIndex(n => n.id === conn.from)
           const toIdx = nodes.findIndex(n => n.id === conn.to)
@@ -47,20 +39,19 @@ export const SystemPipeline: React.FC<SystemPipelineProps> = ({ nodes, connectio
           const x1 = `${step * fromIdx}%`
           const x2 = `${step * toIdx}%`
           
-          // Use path instead of line for better pathLength support in some browsers
-          const d = `M ${x1} 50% L ${x2} 50%`
-
           return (
-            <motion.path
+            <motion.line
               key={`conn-${i}`}
-              d={d}
-              stroke={`url(#${gradientId})`}
+              x1={x1}
+              y1="50%"
+              x2={x2}
+              y2="50%"
+              stroke="#3b82f6"
               strokeWidth="2"
-              fill="none"
-              strokeDasharray="8 4"
+              strokeDasharray="4 4"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={active ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-              transition={{ duration: 1, delay: 0.6 + i * 0.4, ease: "easeInOut" as const }}
+              transition={{ duration: 1.2, delay: 0.6 + i * 0.4, ease: "easeInOut" as const }}
             />
           )
         })}

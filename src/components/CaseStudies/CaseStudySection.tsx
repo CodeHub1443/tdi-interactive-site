@@ -1,7 +1,6 @@
 "use client"
 
-import React, { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import React from "react"
 import { CaseStudyPanel, CaseStudy } from "./CaseStudyPanel"
 
 const caseStudies: CaseStudy[] = [
@@ -159,61 +158,17 @@ const caseStudies: CaseStudy[] = [
 ]
 
 export const CaseStudySection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
-
-  // We have 5 panels. Each is 100vw.
-  // To show panels 1 through 5, we need to translate from 0% to -80%.
-  // Using a slightly more conservative transition range to ensure it feels "pinned".
-  const x = useTransform(scrollYProgress, [0.05, 0.95], ["0%", "-80%"])
-
   return (
-    <section 
-      ref={containerRef} 
-      className="relative h-[600vh] bg-black" // Increased height for more "scroll room" per case study
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <motion.div 
-          style={{ x }} 
-          className="flex h-full w-[500vw]"
-        >
-          {caseStudies.map((study) => (
-            <CaseStudyPanel key={study.id} study={study} />
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Progress Indicator */}
-      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 flex gap-4 z-[100] pointer-events-none">
-        {caseStudies.map((_, i) => {
-          const step = 1 / caseStudies.length
-          const start = i * step
-          const end = (i + 1) * step
-          
-          return (
-            <motion.div
-              key={i}
-              className="h-1 w-10 md:w-16 bg-white/10 rounded-full overflow-hidden"
-            >
-               <motion.div 
-                 className="h-full bg-blue-500"
-                 style={{
-                   scaleX: useTransform(
-                     scrollYProgress,
-                     [start, end],
-                     [0, 1]
-                   ),
-                   transformOrigin: "left"
-                 }}
-               />
-            </motion.div>
-          )
-        })}
-      </div>
+    <section className="relative w-full bg-black flex flex-col">
+      {caseStudies.map((study, i) => (
+        <div key={study.id} className="w-full relative border-b border-white/5 last:border-b-0">
+          <CaseStudyPanel study={study} />
+          {/* Section Indicator */}
+          <div className="absolute top-32 left-6 md:left-24 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/40 text-[10px] font-bold tracking-widest uppercase">
+            Deployment {i + 1} / {caseStudies.length}
+          </div>
+        </div>
+      ))}
     </section>
   )
 }

@@ -50,7 +50,7 @@ export const CaseStudyPanel: React.FC<CaseStudyPanelProps> = ({ study }) => {
   }
 
   return (
-    <div ref={ref} className="w-screen flex-shrink-0 min-h-screen flex flex-col justify-center px-6 md:px-24 py-20 bg-black/40">
+    <div ref={ref} className="w-full flex-shrink-0 min-h-[100svh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-20 bg-black">
       <motion.div 
         variants={containerVariants}
         initial="hidden"
