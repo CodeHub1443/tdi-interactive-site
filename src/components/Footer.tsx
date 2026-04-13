@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { name: "Solutions", href: "/solutions" },
@@ -76,7 +77,7 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => typeof window !== "undefined" && window.dataLayer?.push({ event: "outbound_click", link_url: s.href, link_text: s.label })}
+                  onClick={() => trackEvent("outbound_click", { link_url: s.href, link_text: s.label })}
                   aria-label={s.ariaLabel}
                   className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all text-xs font-bold"
                 >

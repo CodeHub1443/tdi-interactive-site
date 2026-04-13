@@ -8,9 +8,16 @@ interface LayeredSlideProps {
   className?: string
   index?: number
   containerRef?: React.RefObject<HTMLDivElement | null>
+  disableTransform?: boolean
 }
 
-export const LayeredSlide: React.FC<LayeredSlideProps> = ({ children, className, index = 0, containerRef }) => {
+export const LayeredSlide: React.FC<LayeredSlideProps> = ({ 
+  children, 
+  className, 
+  index = 0, 
+  containerRef,
+  disableTransform = false 
+}) => {
   const elementRef = useRef<HTMLDivElement>(null)
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -30,17 +37,17 @@ export const LayeredSlide: React.FC<LayeredSlideProps> = ({ children, className,
     offset: ["start end", "end start"]
   })
 
-  // Entrance and Exit transforms — only active on desktop
-  const y = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], isDesktop ? ["20vh", "0vh", "0vh", "-10vh"] : ["0vh", "0vh", "0vh", "0vh"])
-  const scale = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], isDesktop ? [0.85, 1, 1, 0.95] : [1, 1, 1, 1])
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], isDesktop ? [0, 1, 1, 0] : [1, 1, 1, 1])
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], isDesktop ? [15, 0, -5] : [0, 0, 0])
+  // Entrance and Exit transforms — only active on desktop and if not disabled
+  const y = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], isDesktop && !disableTransform ? ["20vh", "0vh", "0vh", "-10vh"] : ["0vh", "0vh", "0vh", "0vh"])
+  const scale = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], isDesktop && !disableTransform ? [0.85, 1, 1, 0.95] : [1, 1, 1, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], isDesktop && !disableTransform ? [0, 1, 1, 0] : [1, 1, 1, 1])
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], isDesktop && !disableTransform ? [15, 0, -5] : [0, 0, 0])
 
   return (
     <div 
       ref={elementRef} 
-      className={`relative w-full overflow-visible min-h-[100svh] md:snap-start ${className}`}
-      style={{ perspective: isDesktop ? "2000px" : "none" }}
+      className={`relative w-full overflow-visible min-h-[100svh] ${!disableTransform ? "md:snap-start" : ""} ${className}`}
+      style={{ perspective: isDesktop && !disableTransform ? "2000px" : "none" }}
     >
       <motion.div
         style={{
@@ -51,7 +58,7 @@ export const LayeredSlide: React.FC<LayeredSlideProps> = ({ children, className,
           transformOrigin: "center center",
           zIndex: 10 + index
         }}
-        className="w-full min-h-[100svh]"
+        className="w-full h-full"
       >
         {children}
       </motion.div>

@@ -13,6 +13,7 @@ import { ClientSegments } from "@/components/ClientSegments";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { WhyTDI } from "@/components/WhyTDI";
 import { CTASection } from "@/components/CTASection";
+import { CaseStudySection } from "@/components/CaseStudies/CaseStudySection";
 
 export default function HomeClient() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ export default function HomeClient() {
     SolutionsGrid,
     ProcessTimeline,
     WhyTDI,
+    CaseStudySection,
     Technology,
     Products,
     TestimonialSlider,
@@ -43,16 +45,20 @@ export default function HomeClient() {
 
       <WebGLTransitionProvider>
         <main id="main-content" tabIndex={-1} className="flex-1 w-full flex flex-col items-center outline-none">
-          {sections.map((Section, idx) => (
-            <LayeredSlide 
-              key={idx} 
-              index={idx + 1} 
-              className="w-full min-h-[100svh]"
-              containerRef={scrollContainerRef}
-            >
-              <Section />
-            </LayeredSlide>
-          ))}
+          {sections.map((Section, idx) => {
+            const isCaseStudy = Section === CaseStudySection;
+            return (
+              <LayeredSlide 
+                key={idx} 
+                index={idx + 1} 
+                className="w-full"
+                containerRef={scrollContainerRef}
+                disableTransform={isCaseStudy}
+              >
+                <Section />
+              </LayeredSlide>
+            );
+          })}
         </main>
       </WebGLTransitionProvider>
     </div>
