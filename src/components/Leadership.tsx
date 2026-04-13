@@ -53,8 +53,8 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
       aria-label={`${leader.name}, ${leader.role}`}
       className={`relative rounded-2xl md:rounded-3xl overflow-hidden bg-[#111] flex-shrink-0 snap-center shadow-2xl group focus:outline-none focus:ring-2 focus:ring-[#6CF2B0] focus-visible:ring-4
         ${isKeyPerson
-          ? "w-[200px] xs:w-[240px] sm:w-[280px] md:w-[320px] lg:w-[380px] h-[280px] xs:h-[320px] sm:h-[360px] md:h-[420px] lg:h-[480px] z-20 -translate-y-4 sm:-translate-y-8 md:-translate-y-10"
-          : "w-[140px] xs:w-[160px] sm:w-[200px] md:w-[230px] lg:w-[270px] h-[230px] xs:h-[260px] sm:h-[300px] md:h-[340px] lg:h-[390px] z-10 opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity duration-500 -translate-y-2 sm:-translate-y-5"
+          ? "w-[200px] sm:w-[320px] lg:w-[380px] h-[280px] sm:h-[420px] lg:h-[480px] z-20 -translate-y-4 sm:-translate-y-8 lg:-translate-y-10"
+          : "w-[140px] sm:w-[230px] lg:w-[270px] h-[230px] sm:h-[340px] lg:h-[390px] z-10 opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity duration-500 -translate-y-2 sm:-translate-y-5"
         }`}
     >
       {/* Full-bleed photo */}
