@@ -35,6 +35,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Data Island (TDI)",
+    description: "TDI builds exclusively for production deployment, delivering enterprise-grade AI automation, workflow orchestration, and scalable solutions.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -61,22 +67,31 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "The Data Island",
-              "alternateName": "TDI",
-              "url": "https://thedataisland.com",
-              "logo": "https://thedataisland.com/TDI_logo_Black.svg",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "email": "connect@thedataisland.com",
-                "telephone": "+880171100000",
-                "contactType": "sales",
-                "areaServed": ["SG", "BD"],
-                "availableLanguage": "en"
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "The Data Island",
+                "alternateName": "TDI",
+                "url": "https://thedataisland.com",
+                "logo": "https://thedataisland.com/TDI_logo_Black.svg",
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "email": "connect@thedataisland.com",
+                  "telephone": "+880171100000",
+                  "contactType": "sales",
+                  "areaServed": ["SG", "BD"],
+                  "availableLanguage": "en"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "ProfessionalService",
+                "name": "The Data Island",
+                "serviceType": "Enterprise AI Automation",
+                "url": "https://thedataisland.com"
               }
-            })
+            ])
           }}
         />
         <Navbar />

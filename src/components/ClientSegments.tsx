@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { MetricsWall } from "./MetricsBrickWall/MetricsWall";
 
 const logos = [
@@ -42,11 +43,14 @@ export const ClientSegments: React.FC = () => {
                   aria-hidden={idx >= logos.length}
                   className="flex items-center justify-center shrink-0 w-[170px] md:w-[220px] h-20 md:h-24 mx-4 md:mx-6 opacity-90 hover:opacity-100 transition-opacity duration-300"
                 >
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className={`max-w-full w-auto object-contain grayscale brightness-[2.2] contrast-125 ${logo.imgClass || "h-10 md:h-12"}`}
-                  />
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      fill
+                      className={`max-w-full w-auto object-contain grayscale brightness-[2.2] contrast-125 ${logo.imgClass || ""}`}
+                    />
+                  </div>
                 </div>
               ))}
             </div>

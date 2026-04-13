@@ -3,18 +3,20 @@ import { Metadata } from 'next';
 const siteUrl = 'https://thedataisland.com';
 
 export default function Sitemap() {
-  return [
-    {
-      url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${siteUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ];
+  const pages = [
+    "",
+    "/solutions",
+    "/technology",
+    "/case-studies",
+    "/insights",
+    "/about",
+    "/contact"
+  ]
+
+  return pages.map((route) => ({
+    url: `${siteUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: route === "" ? 1 : 0.8,
+  }))
 }

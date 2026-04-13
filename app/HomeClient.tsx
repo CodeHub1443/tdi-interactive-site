@@ -1,19 +1,22 @@
 "use client"
 
 import React, { useRef } from "react";
-import Hero from "@/components/Hero";
-import Technology from "@/components/Technology";
-import SolutionsGrid from "@/components/SolutionsGrid";
-import Products from "@/components/Products";
-import TestimonialSlider from "@/components/TestimonialSlider";
-import Leadership from "@/components/Leadership";
+import dynamic from "next/dynamic";
 import { LayeredSlide } from "@/components/LayeredSlide";
 import { WebGLTransitionProvider } from "@/components/WebGLTransitionProvider";
 import { ClientSegments } from "@/components/ClientSegments";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { WhyTDI } from "@/components/WhyTDI";
 import { CTASection } from "@/components/CTASection";
-import { CaseStudySection } from "@/components/CaseStudies/CaseStudySection";
+import { AeoSummary } from "@/components/AeoSummary";
+
+const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
+const Technology = dynamic(() => import("@/components/Technology"), { ssr: false });
+const SolutionsGrid = dynamic(() => import("@/components/SolutionsGrid"), { ssr: false });
+const Products = dynamic(() => import("@/components/Products"), { ssr: false });
+const TestimonialSlider = dynamic(() => import("@/components/TestimonialSlider"), { ssr: false });
+const Leadership = dynamic(() => import("@/components/Leadership"), { ssr: false });
+const CaseStudySection = dynamic(() => import("@/components/CaseStudies/CaseStudySection").then(mod => mod.CaseStudySection), { ssr: false });
 
 export default function HomeClient() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -28,6 +31,7 @@ export default function HomeClient() {
     Products,
     TestimonialSlider,
     Leadership,
+    AeoSummary,
     CTASection,
   ];
 

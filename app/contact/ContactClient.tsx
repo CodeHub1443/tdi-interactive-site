@@ -6,6 +6,7 @@ import { trackEvent } from "@/lib/analytics";
 
 export default function ContactClient() {
   const [formStarted, setFormStarted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFocus = () => {
     if (!formStarted) {
@@ -23,7 +24,8 @@ export default function ContactClient() {
       return;
     }
     trackEvent("form_submit", { form_name: "Discovery Session Form" });
-    alert("Discovery request submitted!");
+    setIsSubmitted(true);
+    form.reset();
   };
 
   return (
@@ -115,6 +117,11 @@ export default function ContactClient() {
                 >
                   Request Discovery Session
                 </button>
+                {isSubmitted && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-xl bg-accentTeal/10 border border-accentTeal/20 text-accentTeal text-sm font-medium text-center">
+                    Thank you! Your discovery request has been received. We will be in touch shortly.
+                  </motion.div>
+                )}
               </form>
             </motion.div>
 

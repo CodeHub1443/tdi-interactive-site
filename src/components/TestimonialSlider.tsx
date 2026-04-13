@@ -111,10 +111,11 @@ const Testimonials: React.FC = () => {
             {/* Avatar & Name */}
             <div className="flex items-center gap-4">
               <div className="relative w-16 h-16 rounded-full overflow-hidden grayscale">
-                <img
+                <Image
                   src={testimonials[current].avatar}
                   alt={`Portrait of ${testimonials[current].name}`}
-                  className="object-cover w-full h-full"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <div>

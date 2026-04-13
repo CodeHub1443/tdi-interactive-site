@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const leaders = [
@@ -57,10 +58,11 @@ const PhotoCard = ({ leader, index }: { leader: typeof leaders[0]; index: number
         }`}
     >
       {/* Full-bleed photo */}
-      <img
+      <Image
         src={leader.image}
         alt={`Portrait of ${leader.name}`}
-        className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-focus:grayscale-0 group-hover:scale-105 group-focus:scale-105 transition-all duration-700 ease-in-out"
+        fill
+        className="object-cover object-center grayscale group-hover:grayscale-0 group-focus:grayscale-0 group-hover:scale-105 group-focus:scale-105 transition-all duration-700 ease-in-out"
       />
 
       {/* Left-to-right shadow vignette */}
