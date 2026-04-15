@@ -254,7 +254,7 @@ const Technology: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={containerVariants}
-        className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24"
+        className="max-w-ultra mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24"
       >
         {/* Left Column */}
         <div className="flex flex-col h-full justify-between">
@@ -263,7 +263,7 @@ const Technology: React.FC = () => {
               Technology
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.15] mb-8">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-light leading-[1.15] mb-8">
               Enterprise AI Automation <br className="hidden xl:block" />
               Capabilities
             </h2>

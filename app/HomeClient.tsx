@@ -9,6 +9,7 @@ import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { WhyTDI } from "@/components/WhyTDI";
 import { CTASection } from "@/components/CTASection";
 import { AeoSummary } from "@/components/AeoSummary";
+import Footer from "@/components/Footer";
 
 const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
 const Technology = dynamic(() => import("@/components/Technology"), { ssr: false });
@@ -38,6 +39,7 @@ export default function HomeClient() {
   return (
     <div 
       ref={scrollContainerRef}
+      id="main-scroll-container"
       className="h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
     >
       {/* Hero is the page header landmark */}
@@ -63,6 +65,9 @@ export default function HomeClient() {
               </LayeredSlide>
             );
           })}
+          
+          {/* Footer at the very bottom of the scroll flow */}
+          <Footer />
         </main>
       </WebGLTransitionProvider>
     </div>

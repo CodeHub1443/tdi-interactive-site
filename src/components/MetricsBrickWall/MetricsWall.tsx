@@ -9,7 +9,20 @@ export const MetricsWall: React.FC = () => {
   const [inView, setInView]               = useState(false);
   const [particlesActive, setParticlesActive] = useState(false);
   const [mousePos, setMousePos]           = useState({ x: -999, y: -999 });
+  const [isTouch, setIsTouch]             = useState(false);
   const particleDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Detect touch-first / non-hover devices
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouch(window.matchMedia("(hover: none)").matches);
+    };
+    checkTouch();
+    // Optional: listen for changes if user connects mouse/unplugs
+    const mql = window.matchMedia("(hover: none)");
+    mql.addEventListener("change", checkTouch);
+    return () => mql.removeEventListener("change", checkTouch);
+  }, []);
 
   // IntersectionObserver — fires metric counters when section enters viewport
   useEffect(() => {
@@ -26,18 +39,21 @@ export const MetricsWall: React.FC = () => {
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isTouch) return;
     setMousePos({ x: e.clientX, y: e.clientY });
-  }, []);
+  }, [isTouch]);
 
   const handleMouseEnter = useCallback(() => {
+    if (isTouch) return;
     particleDelayRef.current = setTimeout(() => setParticlesActive(true), 120);
-  }, []);
+  }, [isTouch]);
 
   const handleMouseLeave = useCallback(() => {
+    if (isTouch) return;
     if (particleDelayRef.current) clearTimeout(particleDelayRef.current);
     setParticlesActive(false);
     setMousePos({ x: -999, y: -999 });
-  }, []);
+  }, [isTouch]);
 
   return (
     <section
@@ -56,15 +72,18 @@ export const MetricsWall: React.FC = () => {
           inView={inView}
           mouseX={mousePos.x}
           mouseY={mousePos.y}
+          isTouch={isTouch}
         />
       </div>
 
-      {/* Firefly particles */}
-      <ParticleField
-        active={particlesActive}
-        mouseX={mousePos.x}
-        mouseY={mousePos.y}
-      />
+      {/* Firefly particles — only on non-touch */}
+      {!isTouch && (
+        <ParticleField
+          active={particlesActive}
+          mouseX={mousePos.x}
+          mouseY={mousePos.y}
+        />
+      )}
 
       {/* 4-sided vignette — "wall extends beyond frame" look */}
       <div

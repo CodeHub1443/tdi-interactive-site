@@ -18,7 +18,7 @@ export const ClientSegments: React.FC = () => {
     <section aria-label="Trusted Clients" className="bg-[#010404] border-t border-white/5 w-full overflow-hidden">
       
       {/* ── Trusted By + Marquee ────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-12 md:py-14">
+      <div className="max-w-ultra mx-auto px-6 lg:px-8 py-12 md:py-14">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
 
           <div className="w-full lg:w-[280px] shrink-0 text-center lg:text-left">

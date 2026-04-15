@@ -34,15 +34,16 @@ interface BrickSurfaceProps {
   inView: boolean;
   mouseX: number;
   mouseY: number;
+  isTouch: boolean;
 }
 
-export const BrickSurface: React.FC<BrickSurfaceProps> = ({ inView, mouseX, mouseY }) => {
+export const BrickSurface: React.FC<BrickSurfaceProps> = ({ inView, mouseX, mouseY, isTouch }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const brickRefs = useRef<Map<number, HTMLDivElement>>(new Map());
   const frameRef = useRef<number>(0);
 
   const updateGlow = useCallback(() => {
-    if (!containerRef.current || mouseX < -100) return;
+    if (isTouch || !containerRef.current || mouseX < -100) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     const localMX = mouseX - containerRect.left;
     const localMY = mouseY - containerRect.top;

@@ -74,7 +74,7 @@ const itemVariants = {
 export const WhyTDI: React.FC = () => {
   return (
     <section className="bg-[#050a0a] py-16 md:py-24 border-t border-white/5 min-h-screen flex flex-col justify-center items-center overflow-hidden">
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center">
+      <div className="w-full max-w-ultra mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center">
         
         {/* Header */}
         <div className="mb-10 md:mb-16 text-center flex flex-col items-center">

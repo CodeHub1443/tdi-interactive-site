@@ -7,16 +7,17 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      xs: "475px",
+      xs: "390px", // iPhone 15 / modern small
       sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1536px",
+      md: "768px", // iPad portrait / standard tablet
+      lg: "1024px", // iPad landscape / laptop
+      xl: "1280px", // Standard desktop
+      "2xl": "1536px", // Large desktop / 4K starts scaling protection
     },
     extend: {
       maxWidth: {
-        container: "1280px"
+        container: "1280px",
+        ultra: "1440px"
       },
       colors: {
         backgroundPrimary: "#F4F5F6",

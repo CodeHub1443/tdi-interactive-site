@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import FooterWrapper from "@/components/FooterWrapper";
 import { ScrollTracker } from "@/components/ScrollTracker";
 
 const geistSans = Geist({
@@ -98,7 +98,7 @@ export default function RootLayout({
         />
         <Navbar />
         {children}
-        <Footer />
+        <FooterWrapper />
 
         {/* Global Google Tag Manager Script Definition */}
         <Script id="google-tag-manager" strategy="afterInteractive">

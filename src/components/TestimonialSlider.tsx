@@ -64,7 +64,7 @@ const Testimonials: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={containerVariants}
-        className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start"
+        className="max-w-ultra mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start"
       >
         
         {/* Left Column: Headlines and Logos */}
@@ -74,7 +74,7 @@ const Testimonials: React.FC = () => {
               Partners
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-[56px] font-normal leading-tight tracking-tight max-w-[500px]">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal leading-tight tracking-tight max-w-[500px]">
               We Build Enterprise AI Solutions For Our Clients
             </h2>
           </motion.div>

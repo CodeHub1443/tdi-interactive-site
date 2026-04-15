@@ -27,11 +27,11 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="relative z-50 mx-auto w-full max-w-[1800px] px-6 lg:px-8 flex flex-col lg:flex-row justify-end lg:justify-between items-start lg:items-end gap-10 lg:gap-0 pt-32 lg:pt-0"
+          className="relative z-50 mx-auto w-full max-w-ultra px-6 lg:px-8 flex flex-col lg:flex-row justify-end lg:justify-between items-start lg:items-end gap-10 lg:gap-0 pt-32 lg:pt-0"
         >
           
           <div className="max-w-md sm:max-w-lg mt-auto lg:mt-0">
-            <p className="text-3xl sm:text-4xl lg:text-4xl text-white/90 font-light leading-tight">
+            <p className="text-3xl md:text-4xl lg:text-5xl text-white/90 font-light leading-tight">
               The Future of <br className="hidden sm:block" />
               Work is Automated
             </p>
@@ -73,10 +73,10 @@ const Hero: React.FC = () => {
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
         className="relative shrink-0 bg-white border-t border-gray-100 py-10 lg:py-0 lg:h-[35%] w-full"
       >
-        <div className="h-full mx-auto max-w-[1800px] px-6 lg:px-8 flex flex-col lg:flex-row justify-between items-start lg:items-end lg:pb-12 lg:pt-8 gap-8 font-sans">
+        <div className="h-full mx-auto max-w-ultra px-6 lg:px-8 flex flex-col lg:flex-row justify-between items-start lg:items-end lg:pb-12 lg:pt-8 gap-8 font-sans">
           
           <div className="max-w-[840px] h-full flex flex-col justify-end">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl text-textDark mb-4 lg:mb-6 leading-[1.15] font-normal tracking-tight">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl text-textDark mb-4 lg:mb-6 leading-[1.15] font-normal tracking-tight">
               Intelligent Automation for <br className="hidden md:block" />
               Modern Enterprise
             </h2>

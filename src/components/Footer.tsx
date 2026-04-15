@@ -15,8 +15,8 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-white/5 text-white">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-8 py-14 md:py-20">
+    <footer className="bg-black border-t border-white/5 text-white md:snap-start">
+      <div className="max-w-ultra mx-auto px-6 lg:px-8 py-14 md:py-20">
         
         {/* Top Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14 md:mb-20">

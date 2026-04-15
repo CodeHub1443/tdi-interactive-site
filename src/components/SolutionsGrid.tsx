@@ -114,7 +114,7 @@ const SolutionsGrid: React.FC = () => {
       {/* Background Graphic */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(0,230,230,0.03)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
+      <div className="max-w-ultra mx-auto px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
         {/* Headlines */}
         <div className="w-full text-center max-w-3xl mx-auto mb-16 lg:mb-0 lg:absolute lg:top-[-60px] lg:left-1/2 lg:-translate-x-1/2 shrink-0 z-40 lg:pointer-events-none">

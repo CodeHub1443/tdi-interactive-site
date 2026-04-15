@@ -15,31 +15,56 @@ const Navbar: React.FC = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
-  const isActive = isScrolled || isMobileMenuOpen || isHovered;
+  const isVisible = !isScrolled || isHovered || isMobileMenuOpen;
+  const isActive = isScrolled || isMobileMenuOpen;
 
   useEffect(() => {
     setMounted(true);
+    const scrollContainer = document.getElementById("main-scroll-container");
+    
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      const scrollY = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+      if (scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll);
+    } else {
+      window.addEventListener("scroll", handleScroll);
+    }
+    
+    return () => {
+      scrollContainer?.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
+    const lockScroll = (lock: boolean) => {
+      const mainContainer = document.getElementById("main-scroll-container");
+      if (lock) {
+        document.body.style.overflow = "hidden";
+        if (mainContainer) mainContainer.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "unset";
+        if (mainContainer) mainContainer.style.overflow = "auto";
+      }
+    };
+
     if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
+      lockScroll(true);
       // Move focus into menu
       mobileMenuRef.current?.focus();
     } else {
-      document.body.style.overflow = "unset";
+      lockScroll(false);
     }
+    
+    return () => lockScroll(false); // Cleanup on unmount
   }, [isMobileMenuOpen]);
 
   // Close mobile menu on Escape
@@ -65,10 +90,19 @@ const Navbar: React.FC = () => {
 
   return (
     <>
+      {/* Invisible hover trigger area at the top of the viewport - only active when scrolled */}
+      {isScrolled && (
+        <div 
+          className="fixed top-0 left-0 right-0 h-10 z-[110] bg-transparent"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        />
+      )}
+
       {/* Skip to main content – visible on focus (WCAG 2.4.1) */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#6CF2B0] focus:text-black focus:font-semibold focus:rounded-lg focus:shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[120] focus:px-4 focus:py-2 focus:bg-[#6CF2B0] focus:text-black focus:font-semibold focus:rounded-lg focus:shadow-lg"
       >
         Skip to main content
       </a>
@@ -78,12 +112,17 @@ const Navbar: React.FC = () => {
         aria-label="Main navigation"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`fixed top-0 left-0 right-0 z-50 h-[80px] flex items-center transition-all duration-300 ${isActive
+        onFocusCapture={() => setIsHovered(true)}
+        className={`fixed top-0 left-0 right-0 z-[100] h-[80px] flex items-center transition-all duration-200 ease-out ${
+          isVisible 
+            ? "translate-y-0 opacity-100" 
+            : "translate-y-[-100%] opacity-0 pointer-events-none"
+        } ${isActive
           ? "bg-white shadow-xl rounded-b-[32px] border-b border-gray-100"
           : "bg-transparent"
           }`}
       >
-        <div className="max-w-[1800px] mx-auto w-full px-6 flex justify-between items-center">
+        <div className="max-w-ultra mx-auto w-full px-6 flex justify-between items-center">
           {/* Left side: Logo */}
           <Link
             href="/"
