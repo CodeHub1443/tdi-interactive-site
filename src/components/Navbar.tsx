@@ -20,25 +20,22 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     setMounted(true);
-    const scrollContainer = document.getElementById("main-scroll-container");
-    
     const handleScroll = () => {
-      const scrollY = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
-      if (scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      const container = document.getElementById("main-scroll-container");
+      const scrollY = container ? container.scrollTop : window.scrollY;
+      setIsScrolled(scrollY > 50);
     };
 
-    if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", handleScroll);
-    } else {
-      window.addEventListener("scroll", handleScroll);
-    }
+    // Listen on both to be safe across different page structures
+    const container = document.getElementById("main-scroll-container");
+    if (container) container.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    
+    // Initial check
+    handleScroll();
     
     return () => {
-      scrollContainer?.removeEventListener("scroll", handleScroll);
+      document.getElementById("main-scroll-container")?.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -91,11 +88,10 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Invisible hover trigger area at the top of the viewport - only active when scrolled */}
-      {isScrolled && (
+      {isScrolled && !isVisible && (
         <div 
-          className="fixed top-0 left-0 right-0 h-10 z-[110] bg-transparent"
+          className="fixed top-0 left-0 right-0 h-6 z-[120] bg-transparent"
           onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         />
       )}
 
@@ -112,11 +108,10 @@ const Navbar: React.FC = () => {
         aria-label="Main navigation"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onFocusCapture={() => setIsHovered(true)}
-        className={`fixed top-0 left-0 right-0 z-[100] h-[80px] flex items-center transition-all duration-200 ease-out ${
+        className={`fixed top-0 left-0 right-0 z-[100] h-[80px] flex items-center transition-all duration-300 ease-in-out ${
           isVisible 
             ? "translate-y-0 opacity-100" 
-            : "translate-y-[-100%] opacity-0 pointer-events-none"
+            : "translate-y-[-100%] opacity-0"
         } ${isActive
           ? "bg-white shadow-xl rounded-b-[32px] border-b border-gray-100"
           : "bg-transparent"

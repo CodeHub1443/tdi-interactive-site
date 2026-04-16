@@ -2,7 +2,8 @@
 
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { CaseStudySection } from "@/components/CaseStudies/CaseStudySection";
+import { caseStudies } from "@/components/CaseStudies/CaseStudySection";
+import { CaseStudyPanel } from "@/components/CaseStudies/CaseStudyPanel";
 import { CTASection } from "@/components/CTASection";
 import { LayeredSlide } from "@/components/LayeredSlide";
 import Footer from "@/components/Footer";
@@ -44,12 +45,25 @@ export default function CaseStudiesPage() {
           </section>
         </LayeredSlide>
 
-        {/* Cinematic Horizontal Scroll Section */}
-        <LayeredSlide index={1} containerRef={scrollContainerRef} disableTransform={true}>
-          <CaseStudySection />
-        </LayeredSlide>
+        {/* Individual Case Study Slides */}
+        {caseStudies.map((study, idx) => (
+          <LayeredSlide 
+            key={study.id} 
+            index={idx + 1} 
+            containerRef={scrollContainerRef} 
+            disableTransform={true}
+          >
+            <div className="relative w-full h-full">
+              <CaseStudyPanel study={study} />
+              {/* Section Indicator - repositioned for better visibility */}
+              <div className="absolute top-[85svh] right-6 md:right-24 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/40 text-[9px] font-bold tracking-[0.2em] uppercase z-30">
+                Case {idx + 1} // {caseStudies.length}
+              </div>
+            </div>
+          </LayeredSlide>
+        ))}
 
-        <LayeredSlide index={2} containerRef={scrollContainerRef}>
+        <LayeredSlide index={caseStudies.length + 1} containerRef={scrollContainerRef}>
           <CTASection />
         </LayeredSlide>
 

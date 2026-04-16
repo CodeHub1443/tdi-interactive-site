@@ -1,9 +1,25 @@
 "use client"
 
 import React from "react"
-import { CaseStudyPanel, CaseStudy } from "./CaseStudyPanel"
+import { CaseStudyPanel } from "./CaseStudyPanel"
 
-const caseStudies: CaseStudy[] = [
+export interface CaseStudy {
+  id: string
+  title: string
+  client: string
+  industry?: string
+  problem?: string
+  systemSummary: string
+  capabilities: string[]
+  impact: string[]
+  systemNote?: string
+  pipeline: {
+    nodes: { id: string; label: string }[]
+    connections: { from: string; to: string }[]
+  }
+}
+
+export const caseStudies: CaseStudy[] = [
   {
     id: "intrusion-monitoring",
     title: "Automated Intrusion Monitoring",
@@ -155,20 +171,4 @@ const caseStudies: CaseStudy[] = [
       ]
     }
   }
-]
-
-export const CaseStudySection: React.FC = () => {
-  return (
-    <section className="relative w-full bg-black flex flex-col">
-      {caseStudies.map((study, i) => (
-        <div key={study.id} className="w-full relative border-b border-white/5 last:border-b-0 md:snap-start">
-          <CaseStudyPanel study={study} />
-          {/* Section Indicator */}
-          <div className="absolute top-20 left-6 md:left-24 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/40 text-[10px] font-bold tracking-widest uppercase z-30">
-            Deployment {i + 1} / {caseStudies.length}
-          </div>
-        </div>
-      ))}
-    </section>
-  )
-}
+];
