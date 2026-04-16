@@ -6,11 +6,21 @@ import Footer from "./Footer";
 export default function FooterWrapper() {
   const pathname = usePathname();
   
-  // Don't render the layout footer on the home page because it has its own 
-  // footer inside the custom scroll container for snapping compatibility.
-  if (pathname === "/") {
+  // List of pages that have their own Footer inside a snapping container
+  const snappingPages = [
+    "/",
+    "/solutions",
+    "/technology",
+    "/case-studies",
+    "/insights",
+    "/about",
+    "/contact"
+  ];
+  
+  if (snappingPages.includes(pathname)) {
     return null;
   }
 
   return <Footer />;
 }
+

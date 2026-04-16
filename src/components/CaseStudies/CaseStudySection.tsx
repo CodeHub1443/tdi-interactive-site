@@ -161,10 +161,10 @@ export const CaseStudySection: React.FC = () => {
   return (
     <section className="relative w-full bg-black flex flex-col">
       {caseStudies.map((study, i) => (
-        <div key={study.id} className="w-full relative border-b border-white/5 last:border-b-0">
+        <div key={study.id} className="w-full relative border-b border-white/5 last:border-b-0 md:snap-start">
           <CaseStudyPanel study={study} />
           {/* Section Indicator */}
-          <div className="absolute top-32 left-6 md:left-24 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/40 text-[10px] font-bold tracking-widest uppercase">
+          <div className="absolute top-20 left-6 md:left-24 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/40 text-[10px] font-bold tracking-widest uppercase z-30">
             Deployment {i + 1} / {caseStudies.length}
           </div>
         </div>

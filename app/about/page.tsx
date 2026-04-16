@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { CTASection } from "@/components/CTASection";
 import Leadership from "@/components/Leadership";
+import { LayeredSlide } from "@/components/LayeredSlide";
+import Footer from "@/components/Footer";
 
 const aboutSections = [
   {
@@ -34,64 +36,90 @@ const aboutSections = [
   }
 ];
 
+import { PageHeroAnimation } from "@/components/PageHeroAnimation";
+
 export default function AboutPage() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <main className="pt-20">
-      {/* Intro Header */}
-      <section className="bg-black py-24 md:py-32 border-b border-white/5">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
-              Built to <br/><span className="text-accentTeal">Last</span>
-            </h1>
-            <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
-              We architecturalize automation that operates reliably at scale, combining engineering depth with an understanding of real business environments.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Main Sections Breakdown */}
-      {aboutSections.map((section, idx) => (
-        <section key={idx} className={`${section.bgColor} py-16 md:py-24 lg:py-40 border-b border-white/5`}>
-          <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-32">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-accentTeal mb-8 block">/ 0{idx + 1} Section</span>
-                <h2 className="text-3xl md:text-5xl font-normal leading-tight text-white mb-6 uppercase">{section.title}</h2>
-              </div>
-
-              <div>
-                <p className="text-white/40 text-lg md:text-xl font-light leading-relaxed mb-12">
-                  {section.desc}
-                </p>
-
-                {section.structure && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mt-16 pt-12 border-t border-white/10">
-                    {section.structure.map((item, id) => (
-                      <div key={id} className="flex flex-col gap-2">
-                        <span className="text-[10px] uppercase tracking-widest text-white/20 font-bold">{item.key}</span>
-                        <span className="text-white text-base md:text-lg font-medium">{item.val}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+    <div 
+      ref={scrollContainerRef}
+      id="main-scroll-container"
+      className="relative h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
+    >
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        {/* Intro Header */}
+        <LayeredSlide index={0} containerRef={scrollContainerRef}>
+          <section className="bg-black pt-32 h-[100svh] flex items-center overflow-hidden">
+            <div className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="max-w-3xl"
+                >
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
+                    Built to <br/><span className="text-accentTeal">Last</span>
+                  </h1>
+                  <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
+                    We architecturalize automation that operates reliably at scale, combining engineering depth with an understanding of real business environments.
+                  </p>
+                </motion.div>
+                <div className="hidden lg:block">
+                  <PageHeroAnimation type="about" />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        </LayeredSlide>
 
-      {/* Existing Leadership Section */}
-      <section className="bg-black">
-        <Leadership />
-      </section>
+        {/* Main Sections Breakdown */}
+        {aboutSections.map((section, idx) => (
+          <LayeredSlide key={idx} index={idx + 1} containerRef={scrollContainerRef}>
+            <section className={`${section.bgColor} h-[100svh] flex items-center overflow-hidden`}>
+              <div className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-32">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-accentTeal mb-8 block">/ 0{idx + 1} Section</span>
+                    <h2 className="text-3xl md:text-5xl font-normal leading-tight text-white mb-6 uppercase">{section.title}</h2>
+                  </div>
 
-      <CTASection />
-    </main>
+                  <div className="overflow-hidden">
+                    <p className="text-white/40 text-lg md:text-xl font-light leading-relaxed mb-12">
+                      {section.desc}
+                    </p>
+
+                    {section.structure && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mt-4 lg:mt-16 pt-8 lg:pt-12 border-t border-white/10">
+                        {section.structure.map((item, id) => (
+                          <div key={id} className="flex flex-col gap-2">
+                            <span className="text-[10px] uppercase tracking-widest text-white/20 font-bold">{item.key}</span>
+                            <span className="text-white text-base md:text-lg font-medium">{item.val}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+          </LayeredSlide>
+        ))}
+
+        {/* Existing Leadership Section */}
+        <LayeredSlide index={aboutSections.length + 1} containerRef={scrollContainerRef}>
+          <section className="bg-black h-[100svh] overflow-hidden flex items-center">
+            <Leadership />
+          </section>
+        </LayeredSlide>
+
+        <LayeredSlide index={aboutSections.length + 2} containerRef={scrollContainerRef}>
+          <CTASection />
+        </LayeredSlide>
+
+        <Footer />
+      </main>
+    </div>
   );
 }

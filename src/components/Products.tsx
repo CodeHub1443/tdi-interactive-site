@@ -99,7 +99,7 @@ const Products: React.FC = () => {
               {/* Bottom Content Panel */}
               <div className="flex flex-col flex-1 p-8 lg:p-10 justify-center items-center text-center relative z-10">
                 <h3 className="text-xl md:text-2xl font-medium mb-4 flex items-center justify-center gap-2 group-hover:text-accentTeal transition-colors">
-                  {product.title} <span aria-hidden="true" className="text-sm font-light leading-none">&nearr;</span>
+                  {product.title} <span aria-hidden="true" className="text-sm font-light leading-none">↗</span>
                 </h3>
                 <p className="text-sm text-white/40 leading-relaxed font-light px-2 mb-8 max-w-sm">
                   {product.description}

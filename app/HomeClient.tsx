@@ -8,7 +8,6 @@ import { ClientSegments } from "@/components/ClientSegments";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { WhyTDI } from "@/components/WhyTDI";
 import { CTASection } from "@/components/CTASection";
-import { AeoSummary } from "@/components/AeoSummary";
 import Footer from "@/components/Footer";
 
 const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
@@ -27,12 +26,10 @@ export default function HomeClient() {
     SolutionsGrid,
     ProcessTimeline,
     WhyTDI,
-    CaseStudySection,
     Technology,
     Products,
     TestimonialSlider,
     Leadership,
-    AeoSummary,
     CTASection,
   ];
 
@@ -40,7 +37,7 @@ export default function HomeClient() {
     <div 
       ref={scrollContainerRef}
       id="main-scroll-container"
-      className="h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
+      className="relative h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
     >
       {/* Hero is the page header landmark */}
       <header>
@@ -53,6 +50,7 @@ export default function HomeClient() {
         <main id="main-content" tabIndex={-1} className="flex-1 w-full flex flex-col items-center outline-none">
           {sections.map((Section, idx) => {
             const isCaseStudy = Section === CaseStudySection;
+
             return (
               <LayeredSlide 
                 key={idx} 
@@ -66,7 +64,6 @@ export default function HomeClient() {
             );
           })}
           
-          {/* Footer at the very bottom of the scroll flow */}
           <Footer />
         </main>
       </WebGLTransitionProvider>

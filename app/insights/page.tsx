@@ -1,8 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { CTASection } from "@/components/CTASection";
+import { LayeredSlide } from "@/components/LayeredSlide";
+import Footer from "@/components/Footer";
+import { PageHeroAnimation } from "@/components/PageHeroAnimation";
 
 const insights = [
   {
@@ -44,51 +47,86 @@ const insights = [
 ];
 
 export default function InsightsPage() {
-  return (
-    <main className="pt-20">
-      <section className="bg-black py-24 md:py-32 border-b border-white/5">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
-              Automation <br/><span className="text-accentTeal">Insights</span>
-            </h1>
-            <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
-              Explore lessons learned from deploying AI at scale, guides to workflow automation, and the latest trends in industrial intelligence.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-      <section className="bg-black py-16 md:py-24 lg:py-40">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12 md:gap-y-24">
-            {insights.map((article, idx) => (
-              <div key={idx} className="flex flex-col group cursor-pointer">
-                <div className="h-px bg-white/10 w-full mb-8" />
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-accentTeal">{article.category}</span>
-                  <span className="text-white/20 text-xs font-mono">{article.time}</span>
-                </div>
-                <h2 className="text-xl md:text-2xl font-normal leading-snug text-white mb-6 group-hover:text-accentTeal transition-colors">
-                  {article.title}
-                </h2>
-                <p className="text-white/40 text-sm md:text-base leading-relaxed font-light mb-8">
-                  {article.summary}
-                </p>
-                <div className="mt-auto flex items-center gap-3 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all">
-                  Read Article <span>→</span>
+  return (
+    <div 
+      ref={scrollContainerRef}
+      id="main-scroll-container"
+      className="relative h-[100svh] overflow-y-auto overflow-x-hidden bg-black scroll-smooth md:snap-y md:snap-mandatory"
+    >
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        {/* Intro Header */}
+        <LayeredSlide index={0} containerRef={scrollContainerRef}>
+          <section className="bg-black pt-32 h-[100svh] flex items-center overflow-hidden">
+            <div className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="max-w-4xl"
+                >
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8">
+                    Technical <br/><span className="text-accentTeal">Perspectives</span>
+                  </h1>
+                  <p className="text-white/50 text-base md:text-xl font-light leading-relaxed max-w-3xl">
+                    Strategic insights and technical analysis on the implementation of AI agents, enterprise automation, and the future of work.
+                  </p>
+                </motion.div>
+                <div className="hidden lg:block">
+                  <PageHeroAnimation type="insights" />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
+        </LayeredSlide>
 
-      <CTASection />
-    </main>
+        {/* Article Grid */}
+        <LayeredSlide index={1} containerRef={scrollContainerRef}>
+          <section className="bg-black h-[100svh] flex items-center overflow-hidden">
+            <div className="max-w-[1800px] mx-auto px-6 lg:px-8 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {insights.map((article, idx) => (
+                  <motion.article
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="group bg-[#0c1414] border border-white/5 rounded-3xl overflow-hidden hover:border-accentTeal/30 transition-all"
+                  >
+                    <div className="h-48 md:h-64 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-accentTeal/5 group-hover:bg-accentTeal/10 transition-colors" />
+                      <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                        <span className="text-[10px] uppercase tracking-widest text-accentTeal font-bold mb-2">{article.category}</span>
+                        <h4 className="text-lg md:text-xl font-normal text-white leading-snug group-hover:text-accentTeal transition-colors">{article.title}</h4>
+                      </div>
+                    </div>
+                    <div className="p-8">
+                      <p className="text-white/40 text-sm font-light leading-relaxed line-clamp-2 md:line-clamp-3 mb-6">
+                        {article.summary}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">{article.time}</span>
+                        <span className="text-accentTeal text-xs font-bold uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
+                          Read More <span>→</span>
+                        </span>
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+          </section>
+        </LayeredSlide>
+
+        <LayeredSlide index={2} containerRef={scrollContainerRef}>
+          <CTASection />
+        </LayeredSlide>
+
+        <Footer />
+      </main>
+    </div>
   );
 }

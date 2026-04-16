@@ -46,7 +46,7 @@ export const LayeredSlide: React.FC<LayeredSlideProps> = ({
   return (
     <div 
       ref={elementRef} 
-      className={`relative w-full overflow-visible min-h-[100svh] ${!disableTransform ? "md:snap-start" : ""} ${className}`}
+      className={`relative w-full overflow-visible min-h-[100svh] md:snap-start ${className}`}
       style={{ perspective: isDesktop && !disableTransform ? "2000px" : "none" }}
     >
       <motion.div
@@ -58,7 +58,7 @@ export const LayeredSlide: React.FC<LayeredSlideProps> = ({
           transformOrigin: "center center",
           zIndex: 10 + index
         }}
-        className="w-full h-full"
+        className="w-full min-h-full h-auto flex flex-col"
       >
         {children}
       </motion.div>

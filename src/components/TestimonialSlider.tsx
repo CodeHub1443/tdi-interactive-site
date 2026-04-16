@@ -115,6 +115,7 @@ const Testimonials: React.FC = () => {
                   src={testimonials[current].avatar}
                   alt={`Portrait of ${testimonials[current].name}`}
                   fill
+                  sizes="64px"
                   className="object-cover"
                 />
               </div>

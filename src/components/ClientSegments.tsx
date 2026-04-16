@@ -48,6 +48,7 @@ export const ClientSegments: React.FC = () => {
                       src={logo.src}
                       alt={logo.alt}
                       fill
+                      sizes="(max-width: 768px) 170px, 220px"
                       className={`max-w-full w-auto object-contain grayscale brightness-[2.2] contrast-125 ${logo.imgClass || ""}`}
                     />
                   </div>
